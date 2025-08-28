@@ -30,7 +30,7 @@ message = client.chat.completions.create(
         },
         {
             "role": "user",
-            "content": "Hola, como puedo pasarte pdf o documentos para que realices un resumen ."
+            "content": "Hola, como puedo pasarte pdf o documentos para que realices un resumen, en todo caso que no puedas recibir los PDF o los archivos directamente, que puedo hacer para mandarte los datos?"
         }
     ]
 )
