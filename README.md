@@ -57,7 +57,7 @@ flutter run
 
 - PyPDF2, pdfplumber → Extracción de texto de documentos.
 
-- Spacy, NLTK, HuggingFace Transformers → NLP y generación de resúmenes.
+- OpenIA → generación de resúmenes.
 
 - gTTS, pyttsx3 → Text-to-Speech.
 
