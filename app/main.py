@@ -1,3 +1,8 @@
+from openai import OpenAI
+import time
+from dotenv import load_dotenv
+import os
+
 # from gtts import gTTS
 
 # Esta es una prueba de la libreria gTTs de google 
@@ -6,14 +11,10 @@
 # tts.save("output.mp3")
 # print("Audio guardado como output.mp3")
 
-from openai import OpenAI
-import time
-from dotenv import load_dotenv  
-import os
 
 load_dotenv()
 
-API_KEY:str = os.getenv("API_KEY")
+API_KEY: str = os.getenv("API_KEY")
 
 client = OpenAI(    
     api_key=API_KEY,
@@ -30,7 +31,7 @@ message = client.chat.completions.create(
         },
         {
             "role": "user",
-            "content": "Hola, como puedo pasarte pdf o documentos para que realices un resumen, en todo caso que no puedas recibir los PDF o los archivos directamente, que puedo hacer para mandarte los datos?"
+            "content": "Hola, como te puedo mandar un contenido o json a traves de tu API?"
         }
     ]
 )
