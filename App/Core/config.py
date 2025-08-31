@@ -12,6 +12,6 @@ class Settings:
     OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "deepseek/deepseek-chat-v3.1:free")
 
     def __init__(self):
-        logging.info(f"Configuración cargada: OPENAI_MODEL={self.OPENAI_MODEL}, UPLOAD_FOLDER={self.UPLOAD_FOLDER}, OUTPUT_FOLDER={self.OUTPUT_FOLDER}")
+        logging.info(f"Configuración cargada: OPENAI_MODEL={self.OPENAI_MODEL}, OPENAI_BASE_URL={self.OPENAI_BASE_URL}")
 
 settings = Settings()
