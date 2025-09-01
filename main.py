@@ -1,4 +1,4 @@
-
+from App.Database.init_db import init
 from App.services.pdf_extract import PDFExtractor
 from App.services.open_ai import OpenAIClient
 import sys
@@ -7,10 +7,14 @@ from pathlib import Path
 from dotenv import load_dotenv
 import json
 
+
 load_dotenv()
 
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+def db_init():
+    init.create_tables()
 
 def main():
     if len(sys.argv) < 2:
@@ -93,4 +97,6 @@ def main():
     print(f"   • Longitud del análisis: {len(analysis)} caracteres")
 
 if __name__ == "__main__":
-    main()
+    # db_init()
+    # main()
+    pass

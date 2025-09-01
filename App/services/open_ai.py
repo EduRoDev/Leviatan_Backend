@@ -35,7 +35,6 @@ class OpenAIClient:
                         "content": prompt
                     }
                 ],
-                max_tokens=3000,
                 temperature=0.5,
             )
 
@@ -66,8 +65,8 @@ class OpenAIClient:
         2. FLASHCARDS: Crea 5 flashcards de estudio en formato JSON con la estructura:
             [
                 {{
-                    "question": "Pregunta",
-                    "answer": "Respuesta"
+                    "subject": "tema del documento",
+                    "definition": "definición del tema"
                 }},
                 ...
             ]
