@@ -14,13 +14,13 @@ class OpenAIClient:
         )
         logger.info("Cliente inicizalizado con OpenAI")
 
-    def analyze_text(self, text: str, metadata: Dict[str, Any]) -> Tuple[Optional[str], Optional[Dict[str, Any]]]:
+    def analyze_text(self, text: str) -> Tuple[Optional[str], Optional[Dict[str, Any]]]:
         """
         Analiza el texto utilizando el modelo de OpenAI para generar un resumen, flashcards
         y un quiz basado en el contenido del texto.
         """
         try:
-            prompt = self._create_analysis_prompt(text, metadata)
+            prompt = self._create_analysis_prompt(text)
             logger.info("Enviando solicitud al modelo de OpenAI")
             start_time = time.time()
             response = self.client.chat.completions.create(
@@ -35,7 +35,8 @@ class OpenAIClient:
                         "content": prompt
                     }
                 ],
-                temperature=0.5,
+                temperature=0.7,
+                response_format={"type": "json_object"}
             )
 
             end_time = time.time()
@@ -55,38 +56,44 @@ class OpenAIClient:
             return None, {"error": str(e)}
 
 
-    def _create_analysis_prompt(self, text: str, metadata: Dict[str, Any]) -> str:
+    def _create_analysis_prompt(self, text: str) -> str:
         max_length = 10000
         truncated_text = text[:max_length] + "..." if len(text) > max_length else text
-        return f""""
-        eres un asistente de IA que ayuda a analizar y resumir documentos, realizar flashcards de estudio y quizes que propociona:
-
-        1. RESUMEN: Proporciona un resumen ejecutivo donde expliques todo lo que se pueda aprender del texto.
-        2. FLASHCARDS: Crea 5 flashcards de estudio en formato JSON con la estructura:
-            [
-                {{
-                    "subject": "tema del documento",
-                    "definition": "definición del tema"
-                }},
-                ...
-            ]
-        3. QUIZ: Crea un quiz de 5 preguntas en formato JSON con la estructura:
-            [
-                {{
-                    "question": "Pregunta",
-                    "options": ["Opción 1", "Opción 2", "Opción 3", "Opción 4"],
-                    "correct_option": "Opción correcta"
-                }},
-                ...
-            ]
         
-        Información del documento:
-        - Páginas: {metadata.get('extracted_pages', 'N/A')}/{metadata.get('total_pages', 'N/A')}
-        - Método: {metadata.get('extraction_method', 'N/A')}
+        return f"""
+        ANALIZA el siguiente texto y devuelve EXCLUSIVAMENTE un JSON válido con esta estructura exacta:
 
-        CONTENIDO:
+        {{
+            "summary": "resumen completo del documento aquí",
+            "flashcards": [
+                {{
+                    "subject": "tema específico 1",
+                    "definition": "definición detallada 1"
+                }},
+                {{
+                    "subject": "tema específico 2", 
+                    "definition": "definición detallada 2"
+                }}
+            ],
+            "quiz": {{
+                "title": "título del quiz basado en el documento",
+                "questions": [
+                    {{
+                        "question_text": "pregunta 1 aquí",
+                        "options": ["Opción A", "Opción B", "Opción C", "Opción D"],
+                        "correct_option": "Opción correcta"
+                    }},
+                    {{
+                        "question_text": "pregunta 2 aquí",
+                        "options": ["Opción A", "Opción B", "Opción C", "Opción D"],
+                        "correct_option": "Opción correcta" 
+                    }}
+                ]
+            }}
+        }}
+
+        TEXTO A ANALIZAR:
         {truncated_text}
-        RESPONDE EN ESPAÑOL.    
+
+        IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional, sin ```json, ni explicaciones.
         """
-        
-openai_client = OpenAIClient()

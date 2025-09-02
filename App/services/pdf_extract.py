@@ -132,6 +132,7 @@ class PDFExtractor:
                             if table_text:
                                 text += table_text + "\n\n"
                                 successful_pages += 1
+                                
                             else:
                                 logger.warning(f"No se pudo extraer texto de la página {page_num + 1}.")
 
