@@ -1,11 +1,14 @@
 from App.Database.init_db import init
-from App.services.pdf_extract import PDFExtractor
-from App.services.open_ai import OpenAIClient
+from App.Services.pdf_extract import pdf_extractor
+from App.Services.open_ai import OpenAIClient
 import sys
 import os
 from pathlib import Path
 from dotenv import load_dotenv
 import json
+from App.Services.document_services import DocumentService
+from App.Database.database import SessionLocal
+from App.Services.summary_services import SummaryService
 
 
 load_dotenv()
@@ -15,6 +18,49 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 def db_init():
     init.create_tables()
+
+def test_save_document():
+    db = SessionLocal()
+    service = DocumentService(db)
+    project_root = Path(__file__).parent
+    file_path = project_root / "Files" / "oratoria.pdf"
+
+    service.save_document(file_path=file_path)
+    
+    saved = service.get_document(1)
+    client = OpenAIClient()
+    
+    content, metadata = client.analyze_text(saved.content)
+    
+    print("Contenido:", content)
+    print("Metadata:", metadata)
+
+    if content:  
+        try:
+            parsed = json.loads(content)
+            print("JSON parseado correctamente:", parsed)
+            
+            summary_text = parsed.get("summary")
+            
+            if summary_text:
+                summary_service = SummaryService(db)
+                summary_service.save_summary(content=summary_text, document_id=saved.id)
+                print("Resumen guardado en la base de datos.")
+
+                summary_saved = summary_service.get_summary(1)
+                print(summary_saved.content)
+            else:
+                print("No se encontró 'summary' en la respuesta")
+                
+        except json.JSONDecodeError as e:
+            print(f"Error al parsear JSON: {e}")
+            print(f"Contenido recibido: {content}")
+        except Exception as e:
+            print(f"Error inesperado: {e}")
+    else:
+        print("No se recibió contenido de OpenAI")
+
+    db.close()    
 
 def main():
     if len(sys.argv) < 2:
@@ -28,7 +74,7 @@ def main():
         return
     
     print(f"📄 Extrayendo texto de {Path(pdf_path).name}...")
-    extractor = PDFExtractor()
+    extractor = pdf_extractor
     text, error, metadata = extractor.extract_text(pdf_path)
     
     if error:
@@ -99,4 +145,4 @@ def main():
 if __name__ == "__main__":
     # db_init()
     # main()
-    pass
+    test_save_document()
