@@ -1,6 +1,8 @@
 # from App.Database.init_db import init
 from App.Controllers import document_controller
+from App.Controllers import auth_controller
 from fastapi import FastAPI
+from App.Database.database import engine, Base
 
 app = FastAPI(
     title="Leviatan Backend",
@@ -8,15 +10,12 @@ app = FastAPI(
     version="1.0.0"
 )
 
+Base.metadata.create_all(bind=engine)
 app.include_router(document_controller.router)
+app.include_router(auth_controller.router)
 
-#def db_init():
-    #init.create_tables()
+
 @app.get("/")
 def root():
-     return {"message": "Welcome to Leviatan Backend API"}
+    return {"message": "Welcome to Leviatan Backend API"}
     
-# if __name__ == "__main__":
-    # db_init()
-    # main()
-    #test_save_document()

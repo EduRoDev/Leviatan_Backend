@@ -13,9 +13,9 @@ class User(Base):
     password: Mapped[str] = mapped_column(String(255), nullable=False)
     
     #* Relacion uno a muchos (Usuario a Documentos [1:N])
-    #documents: Mapped[List["Document"]] = relationship(
-    #    back_populates="user", cascade="all, delete-orphan"
-    #)
+    documents: Mapped[List["Document"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
 
     
 class Document(Base):
@@ -24,10 +24,10 @@ class Document(Base):
     title: Mapped[str] = mapped_column(String(100), nullable=False)
     content: Mapped[str] = mapped_column(String, nullable=False)
     file_path: Mapped[str] = mapped_column(String, nullable=False)
-    # user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     
     #* Relacion inversa con User
-    # user: Mapped["User"] = relationship(back_populates="documents")
+    user: Mapped["User"] = relationship(back_populates="documents")
 
     
     #! Relacion uno a uno (Documento a Resumenes[1:1])

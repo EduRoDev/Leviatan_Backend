@@ -6,13 +6,13 @@ import shutil
 import os
 import json
 
-from App.utils.db_sessions import get_db
+from App.Utils.db_sessions import get_db
 from App.Services.document_services import DocumentService
 from App.Services.summary_services import SummaryService
 from App.Services.flashcard_services import FlashcardService
 from App.Services.quiz_services import QuizService
-from App.utils.pdf_extract import pdf_extractor
-from App.utils.open_ai import OpenAIClient
+from App.Utils.pdf_extract import pdf_extractor
+from App.Utils.open_ai import OpenAIClient
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
