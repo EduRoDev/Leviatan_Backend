@@ -16,3 +16,4 @@ def setup_logging():
 
     logging.getLogger("pdfplumber").setLevel(logging.WARNING)
     logging.getLogger("PyPDF2").setLevel(logging.WARNING)
+    logging.getLogger("sqlalchemy").setLevel(logging.WARNING)
