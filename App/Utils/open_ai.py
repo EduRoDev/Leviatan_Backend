@@ -94,6 +94,12 @@ class OpenAIClient:
 
         TEXTO A ANALIZAR:
         {truncated_text}
+        
+        REGLAS:
+        DEBEN SER 5 FLASHCARDS EXACTAMENTE.
+        DEBEN SER MINIMO 5 PREGUNTAS EN EL QUIZ.
+        NO INCLUYAS NINGÚN TEXTO FUERA DEL JSON.
 
         IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional, sin ```json, ni explicaciones.
         """
+        

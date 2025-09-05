@@ -4,37 +4,63 @@ from sqlalchemy.orm import Session
 from pathlib import Path
 import shutil
 import os
+import json
 
-from App.Database.database import get_db
+from App.utils.db_sessions import get_db
 from App.Services.document_services import DocumentService
+from App.Services.summary_services import SummaryService
+from App.Services.flashcard_services import FlashcardService
+from App.Services.quiz_services import QuizService
+from App.utils.pdf_extract import pdf_extractor
+from App.utils.open_ai import OpenAIClient
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
 UPLOAD_DIR = Path("Public").resolve()
 
     
-@router.post("/upload")
-async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db)):
-        try:
-            temp_file_path = os.path.join(UPLOAD_DIR, file.filename)
-            
-            with open(temp_file_path, "wb") as buffer:
-                shutil.copyfileobj(file.file, buffer)
-            
-            document_service = DocumentService(db)
-            document = document_service.save_document(temp_file_path)
-            return {
-                "status": "success",
-                "message": "File uploaded and processed successfully",
-                "document_id": document.id,
-                "title": document.title,
-                "file_path": document.file_path
-                
-            }
-            
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
-        
+@router.post("/uploads")
+async def upload_and_analyze(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    file_path = os.path.join(UPLOAD_DIR, file.filename)
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    
+    doc_service = DocumentService(db)
+    summary_service = SummaryService(db)
+    flashcard_service = FlashcardService(db)
+    quiz_service = QuizService(db)
+
+    new_doc = doc_service.save_document(file_path)
+
+    openai_client = OpenAIClient()
+    content, meta = openai_client.analyze_text(new_doc.content)
+    ai_response = json.loads(content)
+
+    summary_obj = summary_service.save_summary(ai_response["summary"], new_doc.id)
+    flashcards_objs = flashcard_service.save_flashcard(ai_response["flashcards"], new_doc.id)
+    quiz_obj = quiz_service.save_quiz(ai_response["quiz"], new_doc.id)
+
+    return {
+        "document": {"id": new_doc.id, "title": new_doc.title},
+        "summary": {"id": summary_obj.id, "content": summary_obj.content},
+        "flashcards": [{"id": fc.id, "question": fc.question, "answer": fc.answer} for fc in flashcards_objs],
+        "quiz": {
+            "id": quiz_obj.id,
+            "title": quiz_obj.title,
+            "questions": [
+                {
+                    "id": q.id,
+                    "question_text": q.question_text,
+                    "correct_option": q.correct_option,
+                    "options": [opt.text for opt in q.options]
+                }
+                for q in quiz_obj.questions
+            ]
+        },
+        "meta": meta
+    }
+    
 @router.get("/{doc_id}")
 def get_document(doc_id: int, db: Session = Depends(get_db)):
         document_service = DocumentService(db)

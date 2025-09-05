@@ -3,8 +3,7 @@ import os
 import shutil
 from pathlib import Path
 from App.Models.models import Document
-from App.Services.pdf_extract import pdf_extractor
-import logging
+from App.utils.pdf_extract import pdf_extractor
 
 class DocumentService():
     def __init__(self, db: Session):
@@ -18,11 +17,14 @@ class DocumentService():
             raise ValueError(f"El archivo no existe: {file_path}")
 
         text, error, metadata = pdf_extractor.extract_text(file_path)
-        if error:
-            raise ValueError(f"Error al extraer el texto {error}")
+        if error or not text:
+            raise ValueError(f"Error al extraer el texto del PDF: {error}")
+        
+        filename = os.path.basename(file_path)
+        title = os.path.splitext(filename)[0]
         
         doc = Document(
-            title=metadata.get("title", Path(file_path).stem),
+            title= title,
             content=text,
             file_path=file_path
         )
