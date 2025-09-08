@@ -35,8 +35,9 @@ class OpenAIClient:
                         "content": prompt
                     }
                 ],
-                temperature=0.7,
-                response_format={"type": "json_object"}
+                temperature=0.9,
+                response_format={"type": "json_object"},
+                max_tokens=5000
             )
 
             end_time = time.time()
@@ -64,7 +65,7 @@ class OpenAIClient:
         ANALIZA el siguiente texto y devuelve EXCLUSIVAMENTE un JSON válido con esta estructura exacta:
 
         {{
-            "summary": "resumen completo del documento aquí",
+            "summary": "resumen completo del documento aquí, explicito pero consiso",
             "flashcards": [
                 {{
                     "subject": "tema específico 1",

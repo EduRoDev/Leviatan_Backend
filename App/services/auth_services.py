@@ -11,7 +11,7 @@ class AuthService():
         if not user or not verify_password(password, user.password):
             raise ValueError("Invalid email or password")
         
-        access_token = create_access_token(data={"sub": user.email, "user_id": user.id})
+        access_token = create_access_token(data={"sub": str(user.id), "email": user.email})
         return user, access_token
     
     def register(self, name: str, last_name: str, email: str, password: str) -> User:

@@ -13,6 +13,7 @@ from App.Services.flashcard_services import FlashcardService
 from App.Services.quiz_services import QuizService
 from App.Utils.pdf_extract import pdf_extractor
 from App.Utils.open_ai import OpenAIClient
+from App.Utils.auth_utils import get_current_user
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
@@ -20,7 +21,12 @@ UPLOAD_DIR = Path("Public").resolve()
 
     
 @router.post("/uploads")
-async def upload_and_analyze(file: UploadFile = File(...), db: Session = Depends(get_db)):
+async def upload_and_analyze(
+    file: UploadFile = File(...), db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+    ):
+    
+    user_id = current_user["id"]
     file_path = os.path.join(UPLOAD_DIR, file.filename)
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
@@ -31,7 +37,7 @@ async def upload_and_analyze(file: UploadFile = File(...), db: Session = Depends
     flashcard_service = FlashcardService(db)
     quiz_service = QuizService(db)
 
-    new_doc = doc_service.save_document(file_path)
+    new_doc = doc_service.save_document(file_path,user_id)
 
     openai_client = OpenAIClient()
     content, meta = openai_client.analyze_text(new_doc.content)
@@ -101,6 +107,6 @@ def view_file(filename: str):
     return FileResponse(
         path=safe_path,
         media_type="application/pdf",
-        headers={"Content-Disposition": f"inline; filename={safe_path.name}"}
+        headers={'Content-Disposition': f'inline; filename="{safe_path.name}"'}
     )
 

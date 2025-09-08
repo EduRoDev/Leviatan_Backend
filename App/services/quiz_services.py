@@ -13,7 +13,7 @@ class QuizService:
         
         self.db.add(quiz_obj)
         self.db.flush()   
-               
+        
         for q in quiz_data["questions"]:
             question = Question(
                 question_text=q["question_text"],
