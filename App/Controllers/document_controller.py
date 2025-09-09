@@ -22,27 +22,32 @@ UPLOAD_DIR = Path("Public").resolve()
     
 @router.post("/uploads")
 async def upload_and_analyze(
-    file: UploadFile = File(...), db: Session = Depends(get_db),
+    file: UploadFile = File(...), 
+    db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user)
-    ):
-    
+):
     user_id = current_user["id"]
     file_path = os.path.join(UPLOAD_DIR, file.filename)
+    
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    
     doc_service = DocumentService(db)
     summary_service = SummaryService(db)
     flashcard_service = FlashcardService(db)
     quiz_service = QuizService(db)
 
-    new_doc = doc_service.save_document(file_path,user_id)
+    # Procesar documento
+    new_doc = doc_service.save_document(file_path, user_id)
 
+    # Usar el cliente async para procesamiento paralelo
     openai_client = OpenAIClient()
-    content, meta = openai_client.analyze_text(new_doc.content)
-    ai_response = json.loads(content)
+    ai_response, meta = await openai_client.analyze_text_parallel(new_doc.content)
+    
+    if not ai_response:
+        raise HTTPException(status_code=500, detail=f"Error en análisis: {meta.get('error', 'Unknown error')}")
 
+    # Guardar resultados en paralelo (opcional)
     summary_obj = summary_service.save_summary(ai_response["summary"], new_doc.id)
     flashcards_objs = flashcard_service.save_flashcard(ai_response["flashcards"], new_doc.id)
     quiz_obj = quiz_service.save_quiz(ai_response["quiz"], new_doc.id)
