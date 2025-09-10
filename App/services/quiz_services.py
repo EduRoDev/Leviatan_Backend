@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from App.Models.models import Quiz, Question, Option
 
 class QuizService:
@@ -29,3 +29,12 @@ class QuizService:
         self.db.commit()
         self.db.refresh(quiz_obj)
         return quiz_obj
+    
+    def get_quiz(self, document_id:int) -> Quiz:
+        quiz = (
+            self.db.query(Quiz)
+            .options(joinedload(Quiz.questions).joinedload(Question.options))
+            .filter(Quiz.document_id == document_id)
+            .first()
+        )
+        return quiz

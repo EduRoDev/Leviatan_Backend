@@ -17,3 +17,8 @@ class SummaryService:
     
     def get_summary(self, summary_id: int) -> Summary:
         return self.db.query(Summary).filter(Summary.id == summary_id).first()
+    
+    def get_summary_document_id(self, document_id:int) -> Summary:
+        resumen = self.db.query(Summary).filter(Summary.document_id == document_id).first()
+        print (f"este es el resumen: {resumen.id}")
+        return resumen

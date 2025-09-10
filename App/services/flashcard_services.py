@@ -17,3 +17,13 @@ class FlashcardService:
             flashcards_objects.append(flashcard)
         self.db.commit()
         return flashcards_objects
+    
+    def get_flashcards(self, document_id: int) -> list[Flashcard]:
+        """
+        Devuelve todas las flashcards asociadas a un documento.
+        """
+        return (
+            self.db.query(Flashcard)
+            .filter(Flashcard.document_id == document_id)
+            .all()
+        )
