@@ -5,12 +5,21 @@ from App.Controllers import summary_controller
 from App.Controllers import flashcard_controller
 from App.Controllers import quiz_controller
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from App.Database.database import engine, Base
 
 app = FastAPI(
     title="Leviatan Backend",
     description="API para gestión de documentos y análisis con OpenAI",
     version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 Base.metadata.create_all(bind=engine)
