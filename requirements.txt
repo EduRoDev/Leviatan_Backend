@@ -15,7 +15,7 @@ python-magic==0.4.27
 
 
 # OpenAI API
-openai==1.3.9
+openai>=1.56.1
 python-dotenv==1.0.0
 
 # Seguridad
