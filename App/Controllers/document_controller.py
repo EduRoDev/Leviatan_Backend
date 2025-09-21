@@ -4,14 +4,12 @@ from sqlalchemy.orm import Session
 from pathlib import Path
 import shutil
 import os
-import json
 
 from App.Utils.db_sessions import get_db
 from App.Services.document_services import DocumentService
 from App.Services.summary_services import SummaryService
 from App.Services.flashcard_services import FlashcardService
 from App.Services.quiz_services import QuizService
-from App.Utils.pdf_extract import pdf_extractor
 from App.Utils.open_ai import OpenAIClient
 from App.Utils.auth_utils import get_current_user
 
@@ -19,7 +17,6 @@ router = APIRouter(prefix="/documents", tags=["documents"])
 
 UPLOAD_DIR = Path("Public").resolve()
 
-    
 @router.post("/uploads")
 async def upload_and_analyze(
     file: UploadFile = File(...), 
@@ -37,17 +34,14 @@ async def upload_and_analyze(
     flashcard_service = FlashcardService(db)
     quiz_service = QuizService(db)
 
-    # Procesar documento
     new_doc = doc_service.save_document(file_path, user_id)
 
-    # Usar el cliente async para procesamiento paralelo
     openai_client = OpenAIClient()
     ai_response, meta = await openai_client.analyze_text_parallel(new_doc.content)
     
     if not ai_response:
         raise HTTPException(status_code=500, detail=f"Error en análisis: {meta.get('error', 'Unknown error')}")
 
-    # Guardar resultados en paralelo (opcional)
     summary_obj = summary_service.save_summary(ai_response["summary"], new_doc.id)
     flashcards_objs = flashcard_service.save_flashcard(ai_response["flashcards"], new_doc.id)
     quiz_obj = quiz_service.save_quiz(ai_response["quiz"], new_doc.id)
@@ -73,7 +67,7 @@ async def upload_and_analyze(
     }
     
 @router.get("/{doc_id}")
-def get_document(doc_id: int, db: Session = Depends(get_db)):
+def get_document(doc_id: int, db: Session = Depends(get_db),current_user: dict = Depends(get_current_user)):
         document_service = DocumentService(db)
         document = document_service.get_document(doc_id)
         if not document:
@@ -86,7 +80,7 @@ def get_document(doc_id: int, db: Session = Depends(get_db)):
         }
                 
 @router.get("/download/{doc_id}")
-def download_file_by_id(doc_id: int, db: Session = Depends(get_db)):
+def download_file_by_id(doc_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     document_service = DocumentService(db)
     document = document_service.get_document(doc_id)
     if not document or not os.path.exists(document.file_path):
@@ -107,6 +101,8 @@ def view_file(doc_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Archivo no encontrado")
     
     filename = os.path.basename(document.file_path)
+
+
     return FileResponse(
         path=document.file_path,
         filename=filename,
