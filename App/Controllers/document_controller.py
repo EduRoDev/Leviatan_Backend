@@ -78,7 +78,7 @@ def get_document(doc_id: int, db: Session = Depends(get_db),current_user: dict =
             "content": document.content,
             "file_path": document.file_path
         }
-        
+                
 @router.get("/download/{doc_id}")
 def download_file_by_id(doc_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     document_service = DocumentService(db)
@@ -93,19 +93,23 @@ def download_file_by_id(doc_id: int, db: Session = Depends(get_db), current_user
         media_type="application/octet-stream"
     )
     
-@router.get("/view/{filename}")
-def view_file(filename: str, current_user: dict = Depends(get_current_user)):
-    safe_path = (UPLOAD_DIR / filename).resolve()
+@router.get("/view/{doc_id}")
+def view_file(doc_id: int, db: Session = Depends(get_db)):
+    document_service = DocumentService(db)
+    document = document_service.get_document(doc_id)
+    if not document or not os.path.exists(document.file_path):
+        raise HTTPException(status_code=404, detail="Archivo no encontrado")
+    
+    filename = os.path.basename(document.file_path)
 
-    if not safe_path.exists() or not safe_path.is_file():
-        raise HTTPException(status_code=404, detail="File not found")
-
-    if not str(safe_path).startswith(str(UPLOAD_DIR)):
-        raise HTTPException(status_code=403, detail="Access denied")
 
     return FileResponse(
-        path=safe_path,
+        path=document.file_path,
+        filename=filename,
         media_type="application/pdf",
-        headers={'Content-Disposition': f'inline; filename="{safe_path.name}"'}
+        headers={
+            'Content-Disposition': f'inline; filename="{filename}"'
+        }
     )
+    
 
