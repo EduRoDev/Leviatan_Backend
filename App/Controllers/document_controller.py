@@ -97,18 +97,20 @@ def download_file_by_id(doc_id: int, db: Session = Depends(get_db), current_user
 def view_file(doc_id: int, db: Session = Depends(get_db)):
     document_service = DocumentService(db)
     document = document_service.get_document(doc_id)
+    
+    print(f"Document fetched: {document}")
     if not document or not os.path.exists(document.file_path):
         raise HTTPException(status_code=404, detail="Archivo no encontrado")
     
     filename = os.path.basename(document.file_path)
 
-
+    print(document)
     return FileResponse(
         path=document.file_path,
         filename=filename,
         media_type="application/pdf",
-        headers={
-            'Content-Disposition': f'inline; filename="{filename}"'
+         headers={
+            "Content-Disposition": f"inline; filename*=UTF-8''{filename}"
         }
     )
     
