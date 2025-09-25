@@ -16,6 +16,9 @@ class Settings:
     OPENAI_BASE_URL: str = os.getenv("OPENAI_BASE_URL")
     OPENAI_MODEL: str = os.getenv("OPENAI_MODEL")
     
+    OPENROUTER_APP_NAME: str = os.getenv("OPENROUTER_APP_NAME", "MiApp/1.0")
+    OPENROUTER_SITE_URL: str = os.getenv("OPENROUTER_SITE_URL","")
+    
     # Database config
     USER_DB: str = os.getenv("USER_DB")
     USER_DB_PASSWORD: str = os.getenv("USER_DB_PASSWORD")

@@ -12,22 +12,37 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(255), nullable=False)
     
-    #* Relacion uno a muchos (Usuario a Documentos [1:N])
-    documents: Mapped[List["Document"]] = relationship(
+    #* Relacion uno a muchos (Usuario a Materias [1:N])
+    subjects: Mapped[List["Subject"]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
+   
 
+class Subject(Base):
+    __tablename__ = "subjects"
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
+    description: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)  # <- ASEGURATE QUE ESTÉ AQUÍ
     
+    #* Relacion inversa con User
+    user: Mapped["User"] = relationship(back_populates="subjects")
+    
+     #* Relacion uno a muchos (Materia a Documentos [1:N])
+    documents: Mapped[List["Document"]] = relationship(
+        back_populates="subject", cascade="all, delete-orphan"
+    )
+
 class Document(Base):
     __tablename__ = "documents"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     title: Mapped[str] = mapped_column(String(100), nullable=False)
     content: Mapped[str] = mapped_column(String, nullable=False)
     file_path: Mapped[str] = mapped_column(String, nullable=False)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    subject_id: Mapped[int] = mapped_column(ForeignKey("subjects.id"), nullable=False)  # <- CORREGIDO
     
-    #* Relacion inversa con User
-    user: Mapped["User"] = relationship(back_populates="documents")
+    #* Relacion inversa con Subject
+    subject: Mapped["Subject"] = relationship(back_populates="documents")
 
     
     #! Relacion uno a uno (Documento a Resumenes[1:1])

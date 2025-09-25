@@ -1,7 +1,5 @@
 from sqlalchemy.orm import Session
 import os
-import shutil
-from pathlib import Path
 from App.Models.models import Document
 from App.Utils.pdf_extract import pdf_extractor
 
@@ -9,7 +7,7 @@ class DocumentService():
     def __init__(self, db: Session):
         self.db = db
 
-    def save_document(self, file_path: str, user_id: int) -> Document:
+    def save_document(self, file_path: str, subject_id: int) -> Document:
         """
         Procesa un archivo PDF ya guardado en disco y lo registra en la base de datos.
         """
@@ -27,7 +25,7 @@ class DocumentService():
             title= title,
             content=text,
             file_path=file_path,
-            user_id=user_id
+            subject_id=subject_id
         )
         
         self.db.add(doc)

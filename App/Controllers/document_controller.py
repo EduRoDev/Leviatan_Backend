@@ -4,11 +4,11 @@ from sqlalchemy.orm import Session
 from pathlib import Path
 import shutil
 import os
-
 from App.Utils.db_sessions import get_db
 from App.Services.document_services import DocumentService
 from App.Services.summary_services import SummaryService
 from App.Services.flashcard_services import FlashcardService
+from App.Services.subject_services import SubjectService
 from App.Services.quiz_services import QuizService
 from App.Utils.open_ai import OpenAIClient
 from App.Utils.auth_utils import get_current_user
@@ -17,8 +17,9 @@ router = APIRouter(prefix="/documents", tags=["documents"])
 
 UPLOAD_DIR = Path("Public").resolve()
 
-@router.post("/uploads")
+@router.post("/uploads/{subject_id}")
 async def upload_and_analyze(
+    subject_id: int,
     file: UploadFile = File(...), 
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user)
@@ -29,12 +30,17 @@ async def upload_and_analyze(
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
+    subject_service = SubjectService(db)
     doc_service = DocumentService(db)
     summary_service = SummaryService(db)
     flashcard_service = FlashcardService(db)
     quiz_service = QuizService(db)
 
-    new_doc = doc_service.save_document(file_path, user_id)
+    subject = subject_service.get_subject_by_id(subject_id)
+    if not subject or subject.user_id != user_id:
+        raise HTTPException(status_code=404, detail="Subject not found or access denied")
+    
+    new_doc = doc_service.save_document(file_path, subject_id)
 
     openai_client = OpenAIClient()
     ai_response, meta = await openai_client.analyze_text_parallel(new_doc.content)
