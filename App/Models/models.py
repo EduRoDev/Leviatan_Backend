@@ -1,5 +1,6 @@
 from typing import Optional, List
-from sqlalchemy import ForeignKey, String
+from datetime import datetime
+from sqlalchemy import ForeignKey, String, Integer, DateTime, Boolean, Float
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase, relationship
 from App.Database.database import Base
 
@@ -16,6 +17,8 @@ class User(Base):
     subjects: Mapped[List["Subject"]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
+    
+    quiz_attempts: Mapped[List["QuizAttempt"]] = relationship()
    
 
 class Subject(Base):
@@ -119,3 +122,35 @@ class Option(Base):
 
     #* Relacion inversa con Question
     question: Mapped["Question"] = relationship(back_populates="options")
+    
+class QuizAttempt(Base):
+    __tablename__ = "quiz_attempts"
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    quiz_id: Mapped[int] = mapped_column(ForeignKey("quizzes.id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    score: Mapped[float] = mapped_column(Float, nullable=False)  # Porcentaje (0-100)
+    total_questions: Mapped[int] = mapped_column(Integer, nullable=False)
+    correct_answers: Mapped[int] = mapped_column(Integer, nullable=False)
+    time_taken: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)  # segundos
+    completed_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    
+    #Relaciones
+    quiz: Mapped["Quiz"] = relationship()
+    user: Mapped["User"] = relationship()
+    
+    #! relacion de intentos 
+    answers: Mapped[List["QuizAnswer"]] = relationship(
+        back_populates="attempt", cascade="all, delete-orphan"
+    )
+    
+class QuizAnswer(Base):
+    __tablename__ = "quiz_answers" 
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    attempt_id: Mapped[int] = mapped_column(ForeignKey("quiz_attempts.id"), nullable=False)
+    question_id: Mapped[int] = mapped_column(ForeignKey("questions.id"), nullable=False)
+    selected_option: Mapped[str] = mapped_column(String, nullable=False)  # Texto de la opción seleccionada
+    is_correct: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    
+    # Relaciones
+    attempt: Mapped["QuizAttempt"] = relationship(back_populates="answers")
+    question: Mapped["Question"] = relationship()
