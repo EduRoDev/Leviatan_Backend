@@ -106,3 +106,52 @@ async def get_user_statistics(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error interno del servidor: {str(e)}"
         )
+        
+@router.get("/subject/{subject_id}/progress", response_model=ProgressBySubjectResponse)
+async def get_progress_by_subject(
+    subject_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+) -> ProgressBySubjectResponse:
+    if not current_user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized.")
+    try:
+        statistics_service = StatisticsService(db)
+        user_id = current_user["id"]
+        progress = statistics_service.get_user_progress_by_subject(user_id, subject_id)
+        return ProgressBySubjectResponse(**progress)
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(e)
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Internal server error: {str(e)}"
+        )
+    
+@router.get("/quiz/{quiz_id}/statistics", response_model=QuizStatisticsResponse)    
+async def get_quiz_statistics(
+    quiz_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+) -> QuizStatisticsResponse:
+    if not current_user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized.")
+    try:
+        statistics_service = StatisticsService(db)
+        stats = statistics_service.get_quiz_statistics(quiz_id)
+        return QuizStatisticsResponse(**stats)
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(e)
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Internal server error: {str(e)}"
+        )
+        
