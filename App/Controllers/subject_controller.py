@@ -11,6 +11,7 @@ router = APIRouter(prefix="/subject", tags=["subject"])
 class SubjectCreate(BaseModel):
     name: str
     description: Optional[str] = None
+    
 
 @router.post("/create")
 async def create_subject(
@@ -27,13 +28,42 @@ async def create_subject(
             subject_data.description, 
             user_id
         )
+        
+        if not new_subject:
+            raise HTTPException(status_code=400, detail="Subject could not be created")
+        
         return {
             "id": new_subject.id,
             "name": new_subject.name,
             "description": new_subject.description,
         }
+        
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@router.get("/user")
+async def get_subjects_by_user(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    user_id = current_user["id"]
+    subject_service = SubjectService(db)
+    
+    try:
+        subjects = subject_service.get_subjects_by_user(user_id)
+        if not subjects:
+            raise HTTPException(status_code=404, detail="No subjects found for this user")
+        
+        return [
+            {
+                "id": subject.id,
+                "name": subject.name,
+                "description": subject.description,
+            } for subject in subjects
+        ]
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Internal Server Error")
     
 @router.get("/test")
 def test():
