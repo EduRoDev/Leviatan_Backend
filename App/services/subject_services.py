@@ -25,6 +25,12 @@ class SubjectService():
         subjects = self.db.query(Subject).filter(Subject.user_id == user_id).all()
         return subjects
     
+    def get_documents_by_subject(self, subject_id: int) -> list[Subject]:
+        subject = self.db.query(Subject).filter(Subject.id == subject_id).first()
+        if not subject:
+            raise ValueError("Subject not found")
+        return subject.documents
+    
     def get_subject_by_id(self, subject_id: int) -> Subject:
         subject = self.db.query(Subject).filter(Subject.id == subject_id).first()
         return subject
