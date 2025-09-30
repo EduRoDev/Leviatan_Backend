@@ -54,7 +54,7 @@ async def record_quiz_attempt(
     current_user: dict = Depends(get_current_user)
 ):
     if current_user["id"] != request.user_id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No tienes permiso para registrar este intento.")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Has not permission to register this attempt.")
     
     try:
         statistics_service = StatisticsService(db)
