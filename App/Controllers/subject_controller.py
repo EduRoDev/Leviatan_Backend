@@ -74,19 +74,13 @@ async def get_documents_by_subject(
 ): 
     subject_service = SubjectService(db)
     try:
-        documents = subject_service.get_documents_by_subject(subject_id)
-        if not documents:
-            raise HTTPException(status_code=404, detail="No documents found for this subject")
-        
-        return [
-            {
-                "id": doc.id,
-                "title": doc.title,
-                "content": doc.content,
-                "file_path": doc.file_path,
-            } for doc in documents
-        ]
-            
+        subject = subject_service.get_subject_by_id(subject_id)
+        if not subject:
+            raise HTTPException(status_code=404, detail="Subject not found")
+
+        return subject.documents
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail="Internal Server Error")
 

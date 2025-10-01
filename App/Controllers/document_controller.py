@@ -100,7 +100,7 @@ def download_file_by_id(doc_id: int, db: Session = Depends(get_db), current_user
     )
     
 @router.get("/view/{doc_id}")
-def view_file(doc_id: int, db: Session = Depends(get_db)):
+def view_file(doc_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     document_service = DocumentService(db)
     document = document_service.get_document(doc_id)
     
@@ -113,9 +113,8 @@ def view_file(doc_id: int, db: Session = Depends(get_db)):
     print(document)
     return FileResponse(
         path=document.file_path,
-        filename=filename,
         media_type="application/pdf",
-         headers={
+        headers={
             "Content-Disposition": f"inline; filename*=UTF-8''{filename}"
         }
     )
