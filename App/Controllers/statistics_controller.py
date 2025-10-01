@@ -107,19 +107,18 @@ async def get_user_statistics(
             detail=f"Error interno del servidor: {str(e)}"
         )
         
-@router.get("/subject/{subject_id}/progress", response_model=ProgressBySubjectResponse)
+@router.get("/subject/progress", response_model=List[ProgressBySubjectResponse])
 async def get_progress_by_subject(
-    subject_id: int,
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user)
-) -> ProgressBySubjectResponse:
+) -> List[ProgressBySubjectResponse]:
     if not current_user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized.")
     try:
         statistics_service = StatisticsService(db)
         user_id = current_user["id"]
-        progress = statistics_service.get_user_progress_by_subject(user_id, subject_id)
-        return ProgressBySubjectResponse(**progress)
+        progress = statistics_service.get_user_progress_by_subject(user_id)
+        return [ProgressBySubjectResponse(**item)for item in progress]
 
     except ValueError as e:
         raise HTTPException(

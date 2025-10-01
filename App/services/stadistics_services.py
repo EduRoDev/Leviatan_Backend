@@ -30,7 +30,7 @@ class StatisticsService:
             correct_answers=0,
             score=0.0,
             time_taken=time_taken,
-            completed_at= datetime.datetime.now()
+            completed_at= datetime.now()
         )
         
         self.db.add(attempt)

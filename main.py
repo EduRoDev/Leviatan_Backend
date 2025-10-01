@@ -5,6 +5,7 @@ from App.Controllers import summary_controller
 from App.Controllers import flashcard_controller
 from App.Controllers import quiz_controller
 from App.Controllers import subject_controller
+from App.Controllers import statistics_controller
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from App.Database.database import engine, Base
@@ -30,6 +31,7 @@ app.include_router(auth_controller.router)
 app.include_router(summary_controller.router)
 app.include_router(flashcard_controller.router)
 app.include_router(quiz_controller.router)
+app.include_router(statistics_controller.router)
 
 
 @app.get("/")
