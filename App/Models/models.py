@@ -24,8 +24,8 @@ class User(Base):
 class Subject(Base):
     __tablename__ = "subjects"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
-    description: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    name: Mapped[str] = mapped_column(String(50), nullable=False)
+    description: Mapped[str] = mapped_column(String(255), nullable=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)  # <- ASEGURATE QUE ESTÉ AQUÍ
     
     #* Relacion inversa con User
@@ -131,8 +131,8 @@ class QuizAttempt(Base):
     score: Mapped[float] = mapped_column(Float, nullable=False)  # Porcentaje (0-100)
     total_questions: Mapped[int] = mapped_column(Integer, nullable=False)
     correct_answers: Mapped[int] = mapped_column(Integer, nullable=False)
-    time_taken: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)  # segundos
-    completed_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    time_taken: Mapped[Optional[int]] = mapped_column(Integer, nullable=False)  # segundos
+    completed_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
     
     #Relaciones
     quiz: Mapped["Quiz"] = relationship()

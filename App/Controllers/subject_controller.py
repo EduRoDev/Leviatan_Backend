@@ -5,6 +5,10 @@ from typing import Optional
 from App.Utils.db_sessions import get_db
 from App.Utils.auth_utils import get_current_user
 from App.Services.subject_services import SubjectService
+from sqlalchemy.exc import IntegrityError
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/subject", tags=["subject"])
 
@@ -39,7 +43,15 @@ async def create_subject(
         }
         
     except ValueError as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        # Errores esperados (por ejemplo, subject ya existe)
+        raise HTTPException(status_code=400, detail=str(e))
+    except IntegrityError as e:
+        db.rollback()
+        logger.error(f"IntegrityError creando subject para user {user_id}: {e}")
+        raise HTTPException(status_code=400, detail="Datos inconsistentes (constraint).")
+    except Exception as e:
+        logger.exception(f"Error inesperado creando subject para user {user_id}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
     
 @router.get("/user")
 async def get_subjects_by_user(
