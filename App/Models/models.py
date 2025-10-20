@@ -163,3 +163,6 @@ class ChatHistory(Base):
     message: Mapped[str] = mapped_column(String, nullable=False)
     response: Mapped[str] = mapped_column(String, nullable=False)
     timestamp: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+    
+    user:Mapped["User"] = relationship()
+    document:Mapped["Document"] = relationship()
