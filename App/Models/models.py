@@ -154,3 +154,12 @@ class QuizAnswer(Base):
     # Relaciones
     attempt: Mapped["QuizAttempt"] = relationship(back_populates="answers")
     question: Mapped["Question"] = relationship()
+    
+class ChatHistory(Base):
+    __tablename__ = "chat_histories"
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    document_id: Mapped[int] = mapped_column(ForeignKey("documents.id"), nullable=False)
+    message: Mapped[str] = mapped_column(String, nullable=False)
+    response: Mapped[str] = mapped_column(String, nullable=False)
+    timestamp: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
