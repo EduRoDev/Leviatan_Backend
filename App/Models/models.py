@@ -19,7 +19,12 @@ class User(Base):
     )
     
     quiz_attempts: Mapped[List["QuizAttempt"]] = relationship()
-   
+    
+    #* Relacion con el historial del chat
+    chat_histories: Mapped[List["ChatHistory"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
+
 
 class Subject(Base):
     __tablename__ = "subjects"
@@ -31,10 +36,12 @@ class Subject(Base):
     #* Relacion inversa con User
     user: Mapped["User"] = relationship(back_populates="subjects")
     
-     #* Relacion uno a muchos (Materia a Documentos [1:N])
+    #* Relacion uno a muchos (Materia a Documentos [1:N])
     documents: Mapped[List["Document"]] = relationship(
         back_populates="subject", cascade="all, delete-orphan"
     )
+    
+    
 
 class Document(Base):
     __tablename__ = "documents"
@@ -60,6 +67,11 @@ class Document(Base):
 
     #! Relacion uno a muchos (Documento a Quizzes[1:N])
     quizzes: Mapped[List["Quiz"]] = relationship(
+        back_populates="document", cascade="all, delete-orphan"
+    )
+    
+    #! Relacion con el historial del chat
+    chat_histories: Mapped[List["ChatHistory"]] = relationship(
         back_populates="document", cascade="all, delete-orphan"
     )
     

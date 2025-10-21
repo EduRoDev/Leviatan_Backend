@@ -19,6 +19,9 @@ class Settings:
     OPENROUTER_APP_NAME: str = os.getenv("OPENROUTER_APP_NAME", "MiApp/1.0")
     OPENROUTER_SITE_URL: str = os.getenv("OPENROUTER_SITE_URL","")
     
+    CHAT_API_KEY: str = os.getenv("CHAT_API_KEY")
+    CHAT_MODEL: str = os.getenv("CHAT_MODEL")
+    
     # Database config
     USER_DB: str = os.getenv("USER_DB")
     USER_DB_PASSWORD: str = os.getenv("USER_DB_PASSWORD")
@@ -94,6 +97,7 @@ class Settings:
         logger.info(f"Configuración cargada para {provider}:")
         logger.info(f"  - Modelo: {self.OPENAI_MODEL}")
         logger.info(f"  - Base URL: {self.OPENAI_BASE_URL}")
+        logger.info(f"  - Modelo de chat: {self.CHAT_MODEL}")
         if self.is_openrouter():
             logger.info(f"  - App: {self.OPENROUTER_APP_NAME}")
 

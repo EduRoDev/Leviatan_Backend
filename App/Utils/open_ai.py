@@ -400,7 +400,7 @@ class OpenAIClient:
             })
             
             response = await self.client.chat.completions.create(
-                model=settings.OPENAI_MODEL,
+                model=settings.CHAT_MODEL,
                 messages=messages,
                 temperature=0.7,
                 max_tokens=1000
