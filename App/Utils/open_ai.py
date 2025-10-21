@@ -38,7 +38,33 @@ class OpenAIClient:
         provider = "OpenRouter" if settings.is_openrouter() else "OpenAI"
         logger.info(f"Cliente Async de {provider} inicializado con modelo: {settings.OPENAI_MODEL}")
 
-    
+    async def test_connection(self) -> bool:
+        """Prueba la conexión con OpenAI"""
+        try:
+            logger.info("Probando conexión con OpenAI...")
+            response = await self.client.chat.completions.create(
+                model=settings.OPENAI_MODEL,
+                messages=[{"role": "user", "content": "test"}],
+                max_tokens=5,
+                timeout=10.0
+            )
+            logger.info("✅ Conexión con OpenAI exitosa")
+            return True
+        except APIConnectionError as e:
+            logger.error(f"❌ Error de conexión con OpenAI: {e}")
+            return False
+        except APITimeoutError as e:
+            logger.error(f"❌ Timeout conectando con OpenAI: {e}")
+            return False
+        except RateLimitError as e:
+            logger.error(f"❌ Rate limit excedido: {e}")
+            return False
+        except APIError as e:
+            logger.error(f"❌ Error de API de OpenAI: {e}")
+            return False
+        except Exception as e:
+            logger.error(f"❌ Error inesperado probando conexión: {e}")
+            return False
 
     async def analyze_text_parallel(self, text: str) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
         """
@@ -415,3 +441,24 @@ class OpenAIClient:
         except Exception as e:
             logger.error(f"Error en chat_with_document: {e}")
             return "Lo siento, ha ocurrido un error al procesar tu solicitud."
+        
+        
+        
+async def test_openai_connection():
+    """Función independiente para probar la conexión a OpenAI"""
+    try:
+        client = OpenAIClient()
+        success = await client.test_connection()
+        if success:
+            print("🎉 ¡Conexión a OpenAI exitosa!")
+        else:
+            print("❌ No se pudo conectar a OpenAI")
+        return success
+    except Exception as e:
+        print(f"❌ Error probando conexión: {e}")
+        return False
+
+# Script de prueba para ejecutar directamente
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(test_openai_connection())        
