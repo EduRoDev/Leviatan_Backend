@@ -32,45 +32,24 @@ async def upload_and_analyze(
 
     subject_service = SubjectService(db)
     doc_service = DocumentService(db)
-    summary_service = SummaryService(db)
-    flashcard_service = FlashcardService(db)
-    quiz_service = QuizService(db)
 
     subject = subject_service.get_subject_by_id(subject_id)
     if not subject or subject.user_id != user_id:
         raise HTTPException(status_code=404, detail="Subject not found or access denied")
     
     new_doc = doc_service.save_document(file_path, subject_id)
-
-    openai_client = OpenAIClient()
-    ai_response, meta = await openai_client.analyze_text_parallel(new_doc.content)
+    if not new_doc:
+        raise HTTPException(status_code=500, detail="Error saving document")
     
-    if not ai_response:
-        raise HTTPException(status_code=500, detail=f"Error en análisis: {meta.get('error', 'Unknown error')}")
-
-    summary_obj = summary_service.save_summary(ai_response["summary"], new_doc.id)
-    flashcards_objs = flashcard_service.save_flashcard(ai_response["flashcards"], new_doc.id)
-    quiz_obj = quiz_service.save_quiz(ai_response["quiz"], new_doc.id)
-
-    return {
-        "document": {"id": new_doc.id, "title": new_doc.title},
-        "summary": {"id": summary_obj.id, "content": summary_obj.content},
-        "flashcards": [{"id": fc.id, "question": fc.question, "answer": fc.answer} for fc in flashcards_objs],
-        "quiz": {
-            "id": quiz_obj.id,
-            "title": quiz_obj.title,
-            "questions": [
-                {
-                    "id": q.id,
-                    "question_text": q.question_text,
-                    "correct_option": q.correct_option,
-                    "options": [opt.text for opt in q.options]
-                }
-                for q in quiz_obj.questions
-            ]
-        },
-        "meta": meta
+    response = {
+        "id": new_doc.id,
+        "title": new_doc.title,
     }
+    return {        
+        **response,
+        "message": "Document uploaded and saved successfully"
+    }
+    
     
 @router.get("/{doc_id}")
 def get_document(doc_id: int, db: Session = Depends(get_db),current_user: dict = Depends(get_current_user)):
@@ -119,4 +98,9 @@ def view_file(doc_id: int, db: Session = Depends(get_db), current_user: dict = D
         }
     )
     
+@router.get("/doc/prueba")
+async def prueba():
+    openai_client = OpenAIClient()
+    response = await openai_client.prueba()
+    return response
 

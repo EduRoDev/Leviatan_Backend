@@ -6,7 +6,7 @@ def setup_logging():
     """"Configura el logging para la aplicación."""
     
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,  # Cambiado a DEBUG para ver más detalles
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         handlers=[
             logging.StreamHandler(sys.stdout),
@@ -17,3 +17,6 @@ def setup_logging():
     logging.getLogger("pdfplumber").setLevel(logging.WARNING)
     logging.getLogger("PyPDF2").setLevel(logging.WARNING)
     logging.getLogger("sqlalchemy").setLevel(logging.WARNING)
+    logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
+    logging.getLogger("httpx").setLevel(logging.WARNING)  # Silenciar logs de httpx
+    logging.getLogger("httpcore").setLevel(logging.WARNING)  # Silenciar logs de httpcore

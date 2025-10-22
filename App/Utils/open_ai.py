@@ -1,7 +1,6 @@
 import logging
-from typing import Dict, Any, Optional, Tuple, List
+from typing import Dict, Any, List
 import time
-import asyncio
 import json
 from openai import AsyncOpenAI
 from openai import APIError, RateLimitError, APIConnectionError, APITimeoutError
@@ -11,24 +10,20 @@ logger = logging.getLogger(__name__)
 
 class OpenAIClient:
     def __init__(self):
-        # Validar configuración antes de crear el cliente
         if not settings.OPENAI_API_KEY:
             raise ValueError("OPENAI_API_KEY no está configurada")
         
         if not hasattr(settings, 'OPENAI_MODEL') or not settings.OPENAI_MODEL:
             raise ValueError("OPENAI_MODEL no está configurado")
         
-        # Configurar cliente con parámetros opcionales
         client_kwargs = {
             "api_key": settings.OPENAI_API_KEY,
-            "timeout": 60.0  # Timeout por defecto de 60 segundos
+            "timeout": 60.0
         }
         
-        # Configurar base_url (siempre necesario para OpenRouter)
         if hasattr(settings, 'OPENAI_BASE_URL') and settings.OPENAI_BASE_URL:
             client_kwargs["base_url"] = settings.OPENAI_BASE_URL
             
-        # Headers adicionales para OpenRouter
         if settings.is_openrouter():
             extra_headers = settings.get_client_headers()
             if extra_headers:
@@ -36,368 +31,315 @@ class OpenAIClient:
             
         self.client = AsyncOpenAI(**client_kwargs)
         provider = "OpenRouter" if settings.is_openrouter() else "OpenAI"
-        logger.info(f"Cliente Async de {provider} inicializado con modelo: {settings.OPENAI_MODEL}")
-
-    
-
-    async def analyze_text_parallel(self, text: str) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
-        """
-        Analiza el texto utilizando llamadas paralelas a OpenAI para cada componente
-        """
+        logger.info(f"Cliente {provider} inicializado: {settings.OPENAI_MODEL}")    
+    async def _call_openai(self, prompt: str, system_message: str) -> Dict[str, Any]:
+        """Método genérico para llamadas a OpenAI con respuesta JSON"""
         try:
-            # Probar conexión antes de procesar
-            if not await self.test_connection():
-                error_msg = "No se pudo establecer conexión con OpenAI"
-                logger.error(error_msg)
-                return None, {"error": error_msg}
-            
-            max_length = 10000
-            truncated_text = text[:max_length] + "..." if len(text) > max_length else text
-            
-            tasks = [
-                self._generate_summary(truncated_text),
-                self._generate_flashcards(truncated_text),
-                self._generate_quiz(truncated_text)
-            ]
-            
-            logger.info("Iniciando llamadas paralelas a OpenAI")
             start_time = time.time()
             
-            # Usar timeout para el gather
+            logger.info(f"📤 Enviando request al modelo: {settings.OPENAI_MODEL}")
+            logger.debug(f"Longitud del prompt: {len(prompt)} caracteres")
+            
+            # Algunos modelos gratuitos no soportan response_format, intentamos sin él
             try:
-                results = await asyncio.wait_for(
-                    asyncio.gather(*tasks, return_exceptions=True),
-                    timeout=120.0  # 2 minutos total
+                response = await self.client.chat.completions.create(
+                    model=settings.OPENAI_MODEL,
+                    messages=[
+                        {"role": "system", "content": system_message},
+                        {"role": "user", "content": prompt}
+                    ],
+                    temperature=0.7,
+                    response_format={"type": "json_object"},
                 )
-            except asyncio.TimeoutError:
-                logger.error("Timeout en llamadas paralelas a OpenAI")
-                return None, {"error": "Timeout en procesamiento"}
+            except Exception as e:
+                logger.warning(f"⚠️ Error con response_format, reintentando sin él: {e}")
+                # Reintentar sin response_format
+                response = await self.client.chat.completions.create(
+                    model=settings.OPENAI_MODEL,
+                    messages=[
+                        {"role": "system", "content": system_message + " IMPORTANTE: Tu respuesta DEBE ser un JSON válido."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    temperature=0.7,
+                )
+            logger.info(f"📥 Respuesta recibida del modelo")
             
-            end_time = time.time()
-            total_time = end_time - start_time
+            # Verificar si hay respuesta
+            if not response.choices:
+                logger.error("❌ No hay choices en la respuesta")
+                raise ValueError("No se recibieron opciones en la respuesta del modelo")
             
-            processed_results = []
-            for i, result in enumerate(results):
-                if isinstance(result, Exception):
-                    logger.error(f"Error en tarea {i}: {result}")
-                    return None, {"error": f"Error en procesamiento: {result}"}
-                processed_results.append(result)
+            message = response.choices[0].message
             
-            summary_result, flashcards_result, quiz_result = processed_results
+            # DeepSeek y algunos modelos de razonamiento usan el campo 'reasoning' en lugar de 'content'
+            content_str = None
             
-            if not all([
-                summary_result and "content" in summary_result,
-                flashcards_result and "flashcards" in flashcards_result,
-                quiz_result and "quiz" in quiz_result
-            ]):
-                logger.error("Estructura de respuesta inválida de OpenAI")
-                return None, {"error": "Estructura de respuesta inválida de la API"}
+            if message.content:
+                content_str = message.content.strip()
+                logger.info(f"✅ Contenido recibido en 'content': {len(content_str)} caracteres")
+            elif hasattr(message, 'reasoning') and message.reasoning:
+                # DeepSeek devuelve en el campo 'reasoning'
+                content_str = message.reasoning.strip()
+                logger.info(f"✅ Contenido recibido en 'reasoning': {len(content_str)} caracteres")
+                # Limpiar tokens especiales de DeepSeek
+                if '<｜begin▁of▁sentence｜>' in content_str:
+                    content_str = content_str.split('<｜begin▁of▁sentence｜>')[0].strip()
+            else:
+                logger.error("❌ El contenido del mensaje está vacío en ambos campos")
+                logger.error(f"Respuesta completa: {response}")
+                raise ValueError("El modelo devolvió una respuesta vacía")
             
-            combined_result = {
-                "summary": summary_result["content"],
-                "flashcards": flashcards_result["flashcards"],
-                "quiz": quiz_result["quiz"]
-            }
+            logger.debug(f"Contenido raw: {content_str[:200]}...")
             
-            combined_meta = {
-                "model": settings.OPENAI_MODEL,
-                "prompt_tokens": sum(r.get("usage", {}).get("prompt_tokens", 0) for r in processed_results),
-                "completion_tokens": sum(r.get("usage", {}).get("completion_tokens", 0) for r in processed_results),
-                "total_tokens": sum(r.get("usage", {}).get("total_tokens", 0) for r in processed_results),
-                "response_time": total_time,
-                "individual_times": {
-                    "summary": processed_results[0].get("response_time", 0),
-                    "flashcards": processed_results[1].get("response_time", 0),
-                    "quiz": processed_results[2].get("response_time", 0)
-                }
-            }
-            
-            logger.info(f"✅ Análisis paralelo completado en {total_time:.2f}s")
-            return combined_result, combined_meta
-            
-        except Exception as e:
-            logger.error(f"Error en análisis paralelo: {e}")
-            return None, {"error": str(e)}
-
-    async def _generate_summary(self, text: str) -> Dict[str, Any]:
-        """Genera solo el resumen"""
-        try:
-            prompt = f"""
-            Genera un resumen completo y conciso del siguiente texto. 
-            Devuelve SOLO un JSON con esta estructura:
-            {{"summary": "resumen completo aquí"}}
-            
-            TEXTO:
-            {text}
-            
-            IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional.
-            """
-            
-            start_time = time.time()
-            
-            response = await self.client.chat.completions.create(
-                model=settings.OPENAI_MODEL,
-                messages=[
-                    {"role": "system", "content": "Eres un experto en resumir documentos académicos. Devuelve solo JSON válido."},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.7,
-                response_format={"type": "json_object"},
-                timeout=45.0
-            )
-            
-            end_time = time.time()
-            
-            if not response.choices or not response.choices[0].message.content:
-                raise ValueError("Respuesta vacía de OpenAI")
-            
-            content_str = response.choices[0].message.content.strip()
-            
+            # Limpiar markdown si existe
             if content_str.startswith('```json'):
                 content_str = content_str.replace('```json', '').replace('```', '').strip()
+            elif content_str.startswith('```'):
+                content_str = content_str.replace('```', '').strip()
             
             content = json.loads(content_str)
             
-            if "summary" not in content:
-                raise ValueError("Estructura JSON inválida: falta campo 'summary'")
-            
-            logger.info("✅ Resumen generado exitosamente")
             return {
-                "content": content["summary"],
+                "data": content,
                 "usage": {
                     "prompt_tokens": response.usage.prompt_tokens,
                     "completion_tokens": response.usage.completion_tokens,
                     "total_tokens": response.usage.total_tokens
                 },
-                "response_time": end_time - start_time
+                "response_time": time.time() - start_time,
+                "model": settings.OPENAI_MODEL
             }
             
-        except APIConnectionError as e:
-            error_msg = f"Error de conexión generando resumen: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except APITimeoutError as e:
-            error_msg = f"Timeout generando resumen: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except RateLimitError as e:
-            error_msg = f"Rate limit excedido generando resumen: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except APIError as e:
-            error_msg = f"Error de API generando resumen: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
+        except (APIConnectionError, APITimeoutError, RateLimitError, APIError) as e:
+            logger.error(f"Error de API: {e}")
+            raise ConnectionError(f"Error de API: {e}")
         except json.JSONDecodeError as e:
-            error_msg = f"Error decodificando JSON del resumen: {e}"
-            logger.error(error_msg)
-            raise ValueError(error_msg)
+            logger.error(f"Error decodificando JSON: {e}")
+            raise ValueError(f"Error decodificando JSON: {e}")
         except Exception as e:
-            logger.error(f"Error generando resumen: {e}")
+            logger.error(f"Error en llamada a OpenAI: {e}")
+            raise    
+    async def generate_summary(self, text: str) -> Dict[str, Any]:
+        """
+        Genera un resumen del texto
+        
+        Returns:
+            {
+                "data": {"summary": "texto del resumen"},
+                "usage": {...},
+                "response_time": float,
+                "model": str
+            }
+        """
+        max_length = 10000
+        truncated_text = text[:max_length] + ("..." if len(text) > max_length else "")
+        
+        logger.info(f"🔄 Generando resumen de texto ({len(truncated_text)} caracteres)")
+        
+        prompt = f"""Analiza el siguiente texto y genera un resumen completo y conciso.
+
+FORMATO DE RESPUESTA REQUERIDO (JSON):
+{{"summary": "tu resumen aquí"}}
+
+TEXTO A RESUMIR:
+{truncated_text}
+
+Responde ÚNICAMENTE con el JSON, sin texto adicional antes o después."""
+        
+        system_message = """Eres un experto en resumir documentos académicos. 
+Tu respuesta DEBE ser ÚNICAMENTE un objeto JSON válido con el formato: {"summary": "texto del resumen"}
+NO incluyas explicaciones, markdown, ni texto adicional. SOLO el JSON."""
+        
+        try:
+            result = await self._call_openai(prompt, system_message)
+            
+            if "summary" not in result["data"]:
+                logger.error(f"❌ Falta campo 'summary'. Data recibida: {result['data']}")
+                raise ValueError("Falta campo 'summary' en respuesta")
+            
+            logger.info(f"✅ Resumen generado exitosamente en {result['response_time']:.2f}s")
+            logger.info(f"📊 Tokens usados: {result['usage']['total_tokens']}")
+            return result
+            
+        except Exception as e:
+            logger.error(f"❌ Error generando resumen: {e}")
             raise
 
-    async def _generate_flashcards(self, text: str) -> Dict[str, Any]:
-        """Genera solo las flashcards"""
-        try:
-            prompt = f"""
-            Crea EXACTAMENTE 5 flashcards de estudio basadas en el texto.
-            Devuelve SOLO un JSON con esta estructura:
-            {{
-                "flashcards": [
-                    {{"subject": "tema 1", "definition": "definición 1"}},
-                    {{"subject": "tema 2", "definition": "definición 2"}}
-                ]
-            }}
-            
-            TEXTO:
-            {text}
-            
-            IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional.
-            """
-            
-            start_time = time.time()
-            
-            response = await self.client.chat.completions.create(
-                model=settings.OPENAI_MODEL,
-                messages=[
-                    {"role": "system", "content": "Eres un experto en crear flashcards educativas. Devuelve solo JSON válido."},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.7,
-                response_format={"type": "json_object"},
-                timeout=45.0
-            )
-            
-            end_time = time.time()
-            
-            if not response.choices or not response.choices[0].message.content:
-                raise ValueError("Respuesta vacía de OpenAI")
-            
-            content_str = response.choices[0].message.content.strip()
-            if content_str.startswith('```json'):
-                content_str = content_str.replace('```json', '').replace('```', '').strip()
-            
-            content = json.loads(content_str)
-            
-            if "flashcards" not in content or not isinstance(content["flashcards"], list):
-                raise ValueError("Estructura JSON inválida: falta campo 'flashcards' o no es una lista")
-            
-            logger.info("✅ Flashcards generadas exitosamente")
-            return {
-                "flashcards": content["flashcards"],
-                "usage": {
-                    "prompt_tokens": response.usage.prompt_tokens,
-                    "completion_tokens": response.usage.completion_tokens,
-                    "total_tokens": response.usage.total_tokens
+    async def generate_flashcards(self, text: str, count: int = 5) -> Dict[str, Any]:
+        """
+        Genera flashcards de estudio
+        
+        Args:
+            text: Texto base para generar flashcards
+            count: Número de flashcards a generar (default: 5)
+        
+        Returns:
+            {
+                "data": {
+                    "flashcards": [
+                        {"subject": "tema", "definition": "definición"},
+                        ...
+                    ]
                 },
-                "response_time": end_time - start_time
+                "usage": {...},
+                "response_time": float,
+                "model": str
             }
+        """
+        max_length = 10000
+        truncated_text = text[:max_length] + ("..." if len(text) > max_length else "")
+        
+        prompt = f"""
+        Crea EXACTAMENTE {count} flashcards de estudio basadas en el texto.
+        Devuelve SOLO un JSON con esta estructura:
+        {{
+            "flashcards": [
+                {{"subject": "tema 1", "definition": "definición 1"}},
+                {{"subject": "tema 2", "definition": "definición 2"}}
+            ]
+        }}
+        
+        TEXTO:
+        {truncated_text}
+        
+        IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional.
+        """
+        
+        system_message = "Eres un experto en crear flashcards educativas. Devuelve solo JSON válido."
+        
+        try:
+            result = await self._call_openai(prompt, system_message)
             
-        except APIConnectionError as e:
-            error_msg = f"Error de conexión generando flashcards: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except APITimeoutError as e:
-            error_msg = f"Timeout generando flashcards: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except RateLimitError as e:
-            error_msg = f"Rate limit excedido generando flashcards: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except APIError as e:
-            error_msg = f"Error de API generando flashcards: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except json.JSONDecodeError as e:
-            error_msg = f"Error decodificando JSON de flashcards: {e}"
-            logger.error(error_msg)
-            raise ValueError(error_msg)
+            if "flashcards" not in result["data"]:
+                raise ValueError("Falta campo 'flashcards' en respuesta")
+            
+            if not isinstance(result["data"]["flashcards"], list):
+                raise ValueError("'flashcards' debe ser una lista")
+            
+            logger.info(f"{len(result['data']['flashcards'])} flashcards generadas en {result['response_time']:.2f}s")
+            return result
+            
         except Exception as e:
             logger.error(f"Error generando flashcards: {e}")
             raise
 
-    async def _generate_quiz(self, text: str) -> Dict[str, Any]:
-        """Genera solo el quiz"""
-        try:
-            prompt = f"""
-            Crea un quiz con MÍNIMO 5 preguntas basadas en el texto.
-            Devuelve SOLO un JSON con esta estructura:
-            {{
-                "quiz": {{
-                    "title": "título del quiz",
-                    "questions": [
-                        {{
-                            "question_text": "pregunta 1",
-                            "options": ["A", "B", "C", "D"],
-                            "correct_option": "Opción correcta"
-                        }}
-                    ]
-                }}
-            }}
-            
-            TEXTO:
-            {text}
-            
-            IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional.
-            """
-            
-            start_time = time.time()
-            
-            response = await self.client.chat.completions.create(
-                model=settings.OPENAI_MODEL,
-                messages=[
-                    {"role": "system", "content": "Eres un experto en crear quizzes educativos. Devuelve solo JSON válido."},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.7,
-                response_format={"type": "json_object"},
-                timeout=45.0
-            )
-            
-            end_time = time.time()
-            
-            if not response.choices or not response.choices[0].message.content:
-                raise ValueError("Respuesta vacía de OpenAI")
-            
-            content_str = response.choices[0].message.content.strip()
-            if content_str.startswith('```json'):
-                content_str = content_str.replace('```json', '').replace('```', '').strip()
-            
-            content = json.loads(content_str)
-            
-            if "quiz" not in content or "questions" not in content["quiz"]:
-                raise ValueError("Estructura JSON inválida: falta campo 'quiz' o 'questions'")
-            
-            logger.info("✅ Quiz generado exitosamente")
-            return {
-                "quiz": content["quiz"],
-                "usage": {
-                    "prompt_tokens": response.usage.prompt_tokens,
-                    "completion_tokens": response.usage.completion_tokens,
-                    "total_tokens": response.usage.total_tokens
+    async def generate_quiz(self, text: str, min_questions: int = 5) -> Dict[str, Any]:
+        """
+        Genera un quiz con preguntas de opción múltiple
+        
+        Args:
+            text: Texto base para generar el quiz
+            min_questions: Número mínimo de preguntas (default: 5)
+        
+        Returns:
+            {
+                "data": {
+                    "quiz": {
+                        "title": "título",
+                        "questions": [
+                            {
+                                "question_text": "pregunta",
+                                "options": ["A", "B", "C", "D"],
+                                "correct_option": "respuesta correcta"
+                            },
+                            ...
+                        ]
+                    }
                 },
-                "response_time": end_time - start_time
+                "usage": {...},
+                "response_time": float,
+                "model": str
             }
+        """
+        max_length = 10000
+        truncated_text = text[:max_length] + ("..." if len(text) > max_length else "")
+        
+        prompt = f"""
+        Crea un quiz con MÍNIMO {min_questions} preguntas basadas en el texto.
+        Devuelve SOLO un JSON con esta estructura:
+        {{
+            "quiz": {{
+                "title": "título del quiz",
+                "questions": [
+                    {{
+                        "question_text": "pregunta 1",
+                        "options": ["A", "B", "C", "D"],
+                        "correct_option": "Opción correcta"
+                    }}
+                ]
+            }}
+        }}
+        
+        TEXTO:
+        {truncated_text}
+        
+        IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional.
+        """
+        
+        system_message = "Eres un experto en crear quizzes educativos. Devuelve solo JSON válido."
+        
+        try:
+            result = await self._call_openai(prompt, system_message)
             
-        except APIConnectionError as e:
-            error_msg = f"Error de conexión generando quiz: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except APITimeoutError as e:
-            error_msg = f"Timeout generando quiz: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except RateLimitError as e:
-            error_msg = f"Rate limit excedido generando quiz: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except APIError as e:
-            error_msg = f"Error de API generando quiz: {e}"
-            logger.error(error_msg)
-            raise ConnectionError(error_msg)
-        except json.JSONDecodeError as e:
-            error_msg = f"Error decodificando JSON del quiz: {e}"
-            logger.error(error_msg)
-            raise ValueError(error_msg)
+            if "quiz" not in result["data"]:
+                raise ValueError("Falta campo 'quiz' en respuesta")
+            
+            if "questions" not in result["data"]["quiz"]:
+                raise ValueError("Falta campo 'questions' en quiz")
+            
+            if not isinstance(result["data"]["quiz"]["questions"], list):
+                raise ValueError("'questions' debe ser una lista")
+            
+            logger.info(f"Quiz generado con {len(result['data']['quiz']['questions'])} preguntas en {result['response_time']:.2f}s")
+            return result
+            
         except Exception as e:
             logger.error(f"Error generando quiz: {e}")
             raise
 
     async def chat_with_document(
         self,
-        document_content:  str,
+        document_content: str,
         user_message: str,
-        chat_history: List[Dict[str,str]] = None
+        chat_history: List[Dict[str, str]] = None
     ) -> str:
+        """
+        Chat interactivo con el documento (retorna texto plano, no JSON)
         
+        Args:
+            document_content: Contenido del documento
+            user_message: Mensaje del usuario
+            chat_history: Historial de conversación (opcional)
+        
+        Returns:
+            str: Respuesta del asistente
+        """
         try:
             max_document_length = 8000
-            truncated_content = document_content[:max_document_length] + "..." if len(document_content) > max_document_length else document_content
-            system_prompt = f""" 
-            Eres un asistente de educativo experto. Tu trabajo es responser las preguntas del usuario sobre el siguiente documento.
+            truncated_content = document_content[:max_document_length] + (
+                "..." if len(document_content) > max_document_length else ""
+            )
+            
+            system_prompt = f"""
+            Eres un asistente educativo experto. Responde preguntas sobre el siguiente documento.
             
             DOCUMENTO:
             {truncated_content}
             
             INSTRUCCIONES:
-            - Responderas ÚNICAMENTE basándote en la información del documento.
-            - Si la información no está en el documento, Indicalo claramente.    
-            - Se conciso y claro en tus respuestas.
-            - Si te piden un resumen o una expliacion hazla en base al documento y que no pase un limite de 150 palabras.
-            - Siempre mantén un tono profesional y educativo.
+            - Responde ÚNICAMENTE basándote en la información del documento
+            - Si la información no está en el documento, indícalo claramente
+            - Sé conciso y claro en tus respuestas
+            - Para resúmenes o explicaciones, no excedas 150 palabras
+            - Mantén un tono profesional y educativo
             """
             
             messages = [{"role": "system", "content": system_prompt}]
             
             if chat_history:
-                recent_history = list(reversed(chat_history[-10:]))
-                messages.extend(recent_history)
+                messages.extend(list(reversed(chat_history[-10:])))
             
-            messages.append({
-                "role": "user",
-                "content": user_message
-            })
+            messages.append({"role": "user", "content": user_message})
             
             response = await self.client.chat.completions.create(
                 model=settings.OPENAI_MODEL,
@@ -409,9 +351,27 @@ class OpenAIClient:
             if not response.choices or not response.choices[0].message.content:
                 raise ValueError("Respuesta vacía de OpenAI")
             
-            response_text = response.choices[0].message.content.strip()
-            return response_text
+            return response.choices[0].message.content.strip()
             
         except Exception as e:
             logger.error(f"Error en chat_with_document: {e}")
             return "Lo siento, ha ocurrido un error al procesar tu solicitud."
+        
+    async def prueba(self):
+        """Método de prueba simple"""
+        try:
+            prompt = "Hola como estas"
+            completion = await self.client.chat.completions.create(
+                model=settings.OPENAI_MODEL,
+                messages=[
+                    {"role": "system", "content": "Eres un asistente útil."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.7
+            )
+            
+            return completion.choices[0].message.content.strip()
+            
+        except Exception as e:
+            logger.error(f"Error en prueba: {e}")
+            return "Error en prueba"

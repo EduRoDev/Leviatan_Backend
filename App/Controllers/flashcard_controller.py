@@ -21,3 +21,4 @@ def get_cards(document_id: int, db: Session = Depends(get_db), current_user: dic
         }
         for c in cards
     ]
+    

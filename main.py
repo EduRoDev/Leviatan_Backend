@@ -9,6 +9,10 @@ from App.Controllers import statistics_controller
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from App.Database.database import engine, Base
+from App.Core.logging import setup_logging
+
+# Configurar logging al inicio
+setup_logging()
 
 app = FastAPI(
     title="Leviatan Backend",
