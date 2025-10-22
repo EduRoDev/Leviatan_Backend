@@ -2375,3 +2375,739 @@ FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace
 WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
 2025-10-22 01:21:13,093 - sqlalchemy.engine.Engine - INFO - [cached since 0.1497s ago] {'table_name': 'chat_histories', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
 2025-10-22 01:21:13,093 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 12:59:45,399 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-10-22 12:59:45,399 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 12:59:45,399 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-10-22 12:59:45,399 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 12:59:45,399 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-10-22 12:59:45,399 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 12:59:45,399 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 12:59:45,410 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,410 - sqlalchemy.engine.Engine - INFO - [generated in 0.00049s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,418 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,418 - sqlalchemy.engine.Engine - INFO - [cached since 0.00751s ago] {'table_name': 'subjects', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,420 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,420 - sqlalchemy.engine.Engine - INFO - [cached since 0.009187s ago] {'table_name': 'documents', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,420 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,420 - sqlalchemy.engine.Engine - INFO - [cached since 0.01225s ago] {'table_name': 'summaries', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,420 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,420 - sqlalchemy.engine.Engine - INFO - [cached since 0.01409s ago] {'table_name': 'flashcards', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,420 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,420 - sqlalchemy.engine.Engine - INFO - [cached since 0.01508s ago] {'table_name': 'quizzes', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,426 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,426 - sqlalchemy.engine.Engine - INFO - [cached since 0.01604s ago] {'table_name': 'questions', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,426 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,428 - sqlalchemy.engine.Engine - INFO - [cached since 0.01681s ago] {'table_name': 'options', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,428 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,428 - sqlalchemy.engine.Engine - INFO - [cached since 0.0176s ago] {'table_name': 'quiz_attempts', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,429 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,429 - sqlalchemy.engine.Engine - INFO - [cached since 0.01866s ago] {'table_name': 'quiz_answers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,429 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 12:59:45,430 - sqlalchemy.engine.Engine - INFO - [cached since 0.01949s ago] {'table_name': 'chat_histories', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 12:59:45,430 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:02:12,283 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-10-22 13:02:12,283 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:02:12,284 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-10-22 13:02:12,284 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:02:12,285 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-10-22 13:02:12,285 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:02:12,286 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:02:12,290 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,290 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,291 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,291 - sqlalchemy.engine.Engine - INFO - [cached since 0.002184s ago] {'table_name': 'subjects', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,292 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,293 - sqlalchemy.engine.Engine - INFO - [cached since 0.00447s ago] {'table_name': 'documents', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,294 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,307 - sqlalchemy.engine.Engine - INFO - [cached since 0.01726s ago] {'table_name': 'summaries', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,308 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,311 - sqlalchemy.engine.Engine - INFO - [cached since 0.02208s ago] {'table_name': 'flashcards', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,313 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,314 - sqlalchemy.engine.Engine - INFO - [cached since 0.02442s ago] {'table_name': 'quizzes', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,314 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,317 - sqlalchemy.engine.Engine - INFO - [cached since 0.02817s ago] {'table_name': 'questions', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,320 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,322 - sqlalchemy.engine.Engine - INFO - [cached since 0.03308s ago] {'table_name': 'options', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,323 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,324 - sqlalchemy.engine.Engine - INFO - [cached since 0.03418s ago] {'table_name': 'quiz_attempts', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,325 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,325 - sqlalchemy.engine.Engine - INFO - [cached since 0.03538s ago] {'table_name': 'quiz_answers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,326 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:02:12,326 - sqlalchemy.engine.Engine - INFO - [cached since 0.03639s ago] {'table_name': 'chat_histories', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:02:12,328 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:02:35,391 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:02:35,393 - sqlalchemy.engine.Engine - INFO - SELECT users.id AS users_id, users.name AS users_name, users.last_name AS users_last_name, users.email AS users_email, users.password AS users_password 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:02:35,393 - sqlalchemy.engine.Engine - INFO - [generated in 0.00091s] {'email_1': 'p@gmail.com', 'param_1': 1}
+2025-10-22 13:02:35,400 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '4.0.1'
+2025-10-22 13:02:35,403 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2025-10-22 13:02:35,664 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:02:41,805 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:02:41,805 - sqlalchemy.engine.Engine - INFO - SELECT users.id AS users_id, users.name AS users_name, users.last_name AS users_last_name, users.email AS users_email, users.password AS users_password 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:02:41,805 - sqlalchemy.engine.Engine - INFO - [cached since 6.413s ago] {'email_1': 'p@gmail.com', 'param_1': 1}
+2025-10-22 13:02:42,095 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:03:48,521 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:03:48,522 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:03:48,528 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:03:48,529 - sqlalchemy.engine.Engine - INFO - [generated in 0.00198s] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:03:48,534 - App.Utils.open_ai - INFO - 📤 Enviando request al modelo: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:03:48,535 - App.Utils.open_ai - DEBUG - Longitud del prompt: 1708 caracteres
+2025-10-22 13:03:49,571 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-c144ccfc-0ef1-4197-b062-2737434dda9f', 'json_data': {'messages': [{'role': 'system', 'content': 'Eres un experto en crear flashcards educativas. Devuelve solo JSON válido.'}, {'role': 'user', 'content': '\n        Crea EXACTAMENTE 5 flashcards de estudio basadas en el texto.\n        Devuelve SOLO un JSON con esta estructura:\n        {\n            "flashcards": [\n                {"subject": "tema 1", "definition": "definición 1"},\n                {"subject": "tema 2", "definition": "definición 2"}\n            ]\n        }\n        \n        TEXTO:\n        Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n        \n        IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional.\n        '}], 'model': 'deepseek/deepseek-chat-v3.1:free', 'response_format': {'type': 'json_object'}, 'temperature': 0.7}}
+2025-10-22 13:03:49,572 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:04:22,521 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "200 OK" Headers({'date': 'Wed, 22 Oct 2025 18:04:57 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992aeb62c8bc3332-BOG'})
+2025-10-22 13:04:22,521 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:04:22,534 - App.Utils.open_ai - INFO - 📥 Respuesta recibida del modelo
+2025-10-22 13:04:22,534 - App.Utils.open_ai - INFO - ✅ Contenido recibido en 'reasoning': 1354 caracteres
+2025-10-22 13:04:22,536 - App.Utils.open_ai - DEBUG - Contenido raw: ```json
+{
+    "flashcards": [
+        {
+            "subject": "Paleta de colores principal",
+            "definition": "Morado principal: #6D28D9, Morado claro: #A78BFA, Lavanda suave: #DDD6FE, Fondo...
+2025-10-22 13:04:22,538 - App.Utils.open_ai - INFO - 5 flashcards generadas en 34.00s
+2025-10-22 13:04:22,538 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:07:12,932 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-10-22 13:07:12,932 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:07:12,938 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-10-22 13:07:12,939 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:07:12,939 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-10-22 13:07:12,939 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:07:12,939 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:07:12,943 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,944 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,945 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,946 - sqlalchemy.engine.Engine - INFO - [cached since 0.002315s ago] {'table_name': 'subjects', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,946 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,946 - sqlalchemy.engine.Engine - INFO - [cached since 0.003074s ago] {'table_name': 'documents', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,946 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,948 - sqlalchemy.engine.Engine - INFO - [cached since 0.003812s ago] {'table_name': 'summaries', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,948 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,948 - sqlalchemy.engine.Engine - INFO - [cached since 0.004533s ago] {'table_name': 'flashcards', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,949 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,949 - sqlalchemy.engine.Engine - INFO - [cached since 0.005296s ago] {'table_name': 'quizzes', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,949 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,949 - sqlalchemy.engine.Engine - INFO - [cached since 0.00609s ago] {'table_name': 'questions', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,951 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,951 - sqlalchemy.engine.Engine - INFO - [cached since 0.007125s ago] {'table_name': 'options', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,951 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,951 - sqlalchemy.engine.Engine - INFO - [cached since 0.008176s ago] {'table_name': 'quiz_attempts', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,952 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,952 - sqlalchemy.engine.Engine - INFO - [cached since 0.009051s ago] {'table_name': 'quiz_answers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,954 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:12,954 - sqlalchemy.engine.Engine - INFO - [cached since 0.009678s ago] {'table_name': 'chat_histories', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:12,954 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:07:43,230 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-10-22 13:07:43,230 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:07:43,230 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-10-22 13:07:43,230 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:07:43,238 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-10-22 13:07:43,238 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:07:43,239 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:07:43,242 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,242 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,244 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,245 - sqlalchemy.engine.Engine - INFO - [cached since 0.002855s ago] {'table_name': 'subjects', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,246 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,246 - sqlalchemy.engine.Engine - INFO - [cached since 0.003878s ago] {'table_name': 'documents', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,246 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,247 - sqlalchemy.engine.Engine - INFO - [cached since 0.004682s ago] {'table_name': 'summaries', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,248 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,248 - sqlalchemy.engine.Engine - INFO - [cached since 0.005582s ago] {'table_name': 'flashcards', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,248 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,248 - sqlalchemy.engine.Engine - INFO - [cached since 0.006524s ago] {'table_name': 'quizzes', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - [cached since 0.007191s ago] {'table_name': 'questions', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - [cached since 0.00789s ago] {'table_name': 'options', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - [cached since 0.008623s ago] {'table_name': 'quiz_attempts', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - [cached since 0.009218s ago] {'table_name': 'quiz_answers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - [cached since 0.01s ago] {'table_name': 'chat_histories', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:07:43,249 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:08:15,358 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-10-22 13:08:15,358 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:08:15,359 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-10-22 13:08:15,359 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:08:15,360 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-10-22 13:08:15,360 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:08:15,360 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:08:15,363 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,363 - sqlalchemy.engine.Engine - INFO - [generated in 0.00030s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,366 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,366 - sqlalchemy.engine.Engine - INFO - [cached since 0.002106s ago] {'table_name': 'subjects', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,366 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,366 - sqlalchemy.engine.Engine - INFO - [cached since 0.002819s ago] {'table_name': 'documents', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,368 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,368 - sqlalchemy.engine.Engine - INFO - [cached since 0.003773s ago] {'table_name': 'summaries', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,369 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,369 - sqlalchemy.engine.Engine - INFO - [cached since 0.004592s ago] {'table_name': 'flashcards', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,370 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,370 - sqlalchemy.engine.Engine - INFO - [cached since 0.005319s ago] {'table_name': 'quizzes', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,370 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,371 - sqlalchemy.engine.Engine - INFO - [cached since 0.005955s ago] {'table_name': 'questions', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,371 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,371 - sqlalchemy.engine.Engine - INFO - [cached since 0.006791s ago] {'table_name': 'options', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,371 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,371 - sqlalchemy.engine.Engine - INFO - [cached since 0.007489s ago] {'table_name': 'quiz_attempts', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,373 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,373 - sqlalchemy.engine.Engine - INFO - [cached since 0.008497s ago] {'table_name': 'quiz_answers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,373 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:08:15,373 - sqlalchemy.engine.Engine - INFO - [cached since 0.009203s ago] {'table_name': 'chat_histories', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:08:15,374 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:08:22,868 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:08:22,885 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:08:22,888 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:08:22,889 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:08:22,890 - App.Utils.open_ai - INFO - 📤 Enviando request al modelo: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:08:22,890 - App.Utils.open_ai - DEBUG - Longitud del prompt: 1708 caracteres
+2025-10-22 13:08:23,153 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-489ac1d2-80a5-44c0-9de0-f546e28ee3be', 'json_data': {'messages': [{'role': 'system', 'content': 'Eres un experto en crear flashcards educativas. Devuelve solo JSON válido.'}, {'role': 'user', 'content': '\n        Crea EXACTAMENTE 5 flashcards de estudio basadas en el texto.\n        Devuelve SOLO un JSON con esta estructura:\n        {\n            "flashcards": [\n                {"subject": "tema 1", "definition": "definición 1"},\n                {"subject": "tema 2", "definition": "definición 2"}\n            ]\n        }\n        \n        TEXTO:\n        Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n        \n        IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional.\n        '}], 'model': 'deepseek/deepseek-chat-v3.1:free', 'response_format': {'type': 'json_object'}, 'temperature': 0.7}}
+2025-10-22 13:08:23,153 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:08:33,394 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "200 OK" Headers({'date': 'Wed, 22 Oct 2025 18:09:27 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992af20fc9a3121a-BOG'})
+2025-10-22 13:08:33,394 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:08:33,401 - App.Utils.open_ai - INFO - 📥 Respuesta recibida del modelo
+2025-10-22 13:08:33,401 - App.Utils.open_ai - INFO - ✅ Contenido recibido en 'reasoning': 957 caracteres
+2025-10-22 13:08:33,401 - App.Utils.open_ai - DEBUG - Contenido raw: ```json
+{
+    "flashcards": [
+        {
+            "subject": "Color principal", 
+            "definition": "#6D28D9 (Morado principal) - Usado para botones primarios y títulos destacados. Hover reco...
+2025-10-22 13:08:33,401 - App.Utils.open_ai - INFO - 5 flashcards generadas en 10.51s
+2025-10-22 13:08:33,409 - sqlalchemy.engine.Engine - INFO - INSERT INTO flashcards (question, answer, document_id) SELECT p0::VARCHAR, p1::VARCHAR, p2::INTEGER FROM (VALUES (%(question__0)s, %(answer__0)s, %(document_id__0)s, 0), (%(question__1)s, %(answer__1)s, %(document_id__1)s, 1), (%(question__2)s, %(ans ... 152 characters truncated ... mp_sen(p0, p1, p2, sen_counter) ORDER BY sen_counter RETURNING flashcards.id, flashcards.id AS id__1
+2025-10-22 13:08:33,410 - sqlalchemy.engine.Engine - INFO - [generated in 0.00007s (insertmanyvalues) 1/1 (ordered)] {'question__0': 'Color principal', 'answer__0': '#6D28D9 (Morado principal) - Usado para botones primarios y títulos destacados. Hover recomendado: #5B21B6.', 'document_id__0': 1, 'question__1': 'Color secundario', 'answer__1': '#A78BFA (Morado claro) - Usado para botones secundarios y elementos resaltados. Hover recomendado: #9333EA.', 'document_id__1': 1, 'question__2': 'Bordes y fondos', 'answer__2': '#DDD6FE (Lavanda suave) - Usado para bordes de tarjetas y fondos decorativos.', 'document_id__2': 1, 'question__3': 'Fondo principal', 'answer__3': '#F5F3FF (Fondo muy claro) - Color de fondo general de la aplicación.', 'document_id__3': 1, 'question__4': 'Color de texto', 'answer__4': '#1F1F1F (Texto oscuro) - Color principal para todo el texto para asegurar máxima legibilidad.', 'document_id__4': 1}
+2025-10-22 13:08:33,429 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:08:33,448 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:08:33,449 - sqlalchemy.engine.Engine - INFO - SELECT flashcards.id AS flashcards_id, flashcards.question AS flashcards_question, flashcards.answer AS flashcards_answer, flashcards.document_id AS flashcards_document_id 
+FROM flashcards 
+WHERE flashcards.id = %(pk_1)s
+2025-10-22 13:08:33,449 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] {'pk_1': 1}
+2025-10-22 13:08:33,450 - sqlalchemy.engine.Engine - INFO - SELECT flashcards.id AS flashcards_id, flashcards.question AS flashcards_question, flashcards.answer AS flashcards_answer, flashcards.document_id AS flashcards_document_id 
+FROM flashcards 
+WHERE flashcards.id = %(pk_1)s
+2025-10-22 13:08:33,450 - sqlalchemy.engine.Engine - INFO - [cached since 0.001664s ago] {'pk_1': 2}
+2025-10-22 13:08:33,451 - sqlalchemy.engine.Engine - INFO - SELECT flashcards.id AS flashcards_id, flashcards.question AS flashcards_question, flashcards.answer AS flashcards_answer, flashcards.document_id AS flashcards_document_id 
+FROM flashcards 
+WHERE flashcards.id = %(pk_1)s
+2025-10-22 13:08:33,451 - sqlalchemy.engine.Engine - INFO - [cached since 0.00242s ago] {'pk_1': 3}
+2025-10-22 13:08:33,451 - sqlalchemy.engine.Engine - INFO - SELECT flashcards.id AS flashcards_id, flashcards.question AS flashcards_question, flashcards.answer AS flashcards_answer, flashcards.document_id AS flashcards_document_id 
+FROM flashcards 
+WHERE flashcards.id = %(pk_1)s
+2025-10-22 13:08:33,451 - sqlalchemy.engine.Engine - INFO - [cached since 0.003393s ago] {'pk_1': 4}
+2025-10-22 13:08:33,451 - sqlalchemy.engine.Engine - INFO - SELECT flashcards.id AS flashcards_id, flashcards.question AS flashcards_question, flashcards.answer AS flashcards_answer, flashcards.document_id AS flashcards_document_id 
+FROM flashcards 
+WHERE flashcards.id = %(pk_1)s
+2025-10-22 13:08:33,451 - sqlalchemy.engine.Engine - INFO - [cached since 0.004169s ago] {'pk_1': 5}
+2025-10-22 13:08:33,451 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:20:49,259 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:20:49,261 - sqlalchemy.engine.Engine - INFO - SELECT flashcards.id AS flashcards_id, flashcards.question AS flashcards_question, flashcards.answer AS flashcards_answer, flashcards.document_id AS flashcards_document_id 
+FROM flashcards 
+WHERE flashcards.document_id = %(document_id_1)s
+2025-10-22 13:20:49,263 - sqlalchemy.engine.Engine - INFO - [generated in 0.00091s] {'document_id_1': 1}
+2025-10-22 13:20:49,267 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:29:46,209 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-10-22 13:29:46,210 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:29:46,211 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-10-22 13:29:46,212 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:29:46,213 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-10-22 13:29:46,215 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:29:46,215 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:29:46,220 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,220 - sqlalchemy.engine.Engine - INFO - [generated in 0.00050s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,223 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,223 - sqlalchemy.engine.Engine - INFO - [cached since 0.003053s ago] {'table_name': 'subjects', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,223 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,224 - sqlalchemy.engine.Engine - INFO - [cached since 0.003973s ago] {'table_name': 'documents', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,224 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,224 - sqlalchemy.engine.Engine - INFO - [cached since 0.004765s ago] {'table_name': 'summaries', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,225 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,225 - sqlalchemy.engine.Engine - INFO - [cached since 0.005597s ago] {'table_name': 'flashcards', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,225 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,225 - sqlalchemy.engine.Engine - INFO - [cached since 0.006281s ago] {'table_name': 'quizzes', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,228 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,229 - sqlalchemy.engine.Engine - INFO - [cached since 0.009192s ago] {'table_name': 'questions', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,230 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,231 - sqlalchemy.engine.Engine - INFO - [cached since 0.0111s ago] {'table_name': 'options', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,232 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,233 - sqlalchemy.engine.Engine - INFO - [cached since 0.01263s ago] {'table_name': 'quiz_attempts', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,233 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,233 - sqlalchemy.engine.Engine - INFO - [cached since 0.01347s ago] {'table_name': 'quiz_answers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,234 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:29:46,234 - sqlalchemy.engine.Engine - INFO - [cached since 0.01451s ago] {'table_name': 'chat_histories', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:29:46,235 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:29:53,423 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:29:53,438 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:29:53,440 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:29:53,441 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:29:53,442 - App.Utils.open_ai - INFO - 📤 Enviando request al modelo: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:29:53,442 - App.Utils.open_ai - DEBUG - Longitud del prompt: 1869 caracteres
+2025-10-22 13:29:53,704 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-f757b08c-e949-4f77-b43c-c127dcc3da96', 'json_data': {'messages': [{'role': 'system', 'content': 'Eres un experto en crear quizzes educativos. Devuelve solo JSON válido.'}, {'role': 'user', 'content': '\n        Crea un quiz con MÍNIMO 5 preguntas basadas en el texto.\n        Devuelve SOLO un JSON con esta estructura:\n        {\n            "quiz": {\n                "title": "título del quiz",\n                "questions": [\n                    {\n                        "question_text": "pregunta 1",\n                        "options": ["A", "B", "C", "D"],\n                        "correct_option": "Opción correcta"\n                    }\n                ]\n            }\n        }\n        \n        TEXTO:\n        Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n        \n        IMPORTANTE: Devuelve SOLO el JSON válido, sin texto adicional.\n        '}], 'model': 'deepseek/deepseek-chat-v3.1:free', 'response_format': {'type': 'json_object'}, 'temperature': 0.7}}
+2025-10-22 13:29:53,704 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:30:12,020 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "200 OK" Headers({'date': 'Wed, 22 Oct 2025 18:31:00 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992b1191fca81bc9-BOG'})
+2025-10-22 13:30:12,020 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:30:12,027 - App.Utils.open_ai - INFO - 📥 Respuesta recibida del modelo
+2025-10-22 13:30:12,027 - App.Utils.open_ai - INFO - ✅ Contenido recibido en 'reasoning': 1752 caracteres
+2025-10-22 13:30:12,027 - App.Utils.open_ai - DEBUG - Contenido raw: ```json
+{
+    "quiz": {
+        "title": "Manual de Colores - Prueba de Conocimiento",
+        "questions": [
+            {
+                "question_text": "¿Cuál es el color principal (#6D28D9) util...
+2025-10-22 13:30:12,028 - App.Utils.open_ai - INFO - Quiz generado con 6 preguntas en 18.59s
+2025-10-22 13:30:12,030 - sqlalchemy.engine.Engine - INFO - INSERT INTO quizzes (title, document_id) VALUES (%(title)s, %(document_id)s) RETURNING quizzes.id
+2025-10-22 13:30:12,030 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] {'title': 'Manual de Colores - Prueba de Conocimiento', 'document_id': 1}
+2025-10-22 13:30:12,039 - sqlalchemy.engine.Engine - INFO - INSERT INTO questions (question_text, correct_option, quiz_id) VALUES (%(question_text)s, %(correct_option)s, %(quiz_id)s) RETURNING questions.id
+2025-10-22 13:30:12,039 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] {'question_text': '¿Cuál es el color principal (#6D28D9) utilizado para?', 'correct_option': 'Botones primarios y títulos destacados', 'quiz_id': 1}
+2025-10-22 13:30:12,041 - sqlalchemy.engine.Engine - INFO - INSERT INTO questions (question_text, correct_option, quiz_id) VALUES (%(question_text)s, %(correct_option)s, %(quiz_id)s) RETURNING questions.id
+2025-10-22 13:30:12,041 - sqlalchemy.engine.Engine - INFO - [cached since 0.003116s ago] {'question_text': '¿Qué color se recomienda para el hover sobre botones primarios?', 'correct_option': '#5B21B6', 'quiz_id': 1}
+2025-10-22 13:30:12,042 - sqlalchemy.engine.Engine - INFO - INSERT INTO options (text, question_id) SELECT p0::VARCHAR, p1::INTEGER FROM (VALUES (%(text__0)s, %(question_id__0)s, 0), (%(text__1)s, %(question_id__1)s, 1), (%(text__2)s, %(question_id__2)s, 2), (%(text__3)s, %(question_id__3)s, 3)) AS imp_sen(p0, p1, sen_counter) ORDER BY sen_counter RETURNING options.id, options.id AS id__1
+2025-10-22 13:30:12,043 - sqlalchemy.engine.Engine - INFO - [generated in 0.00004s (insertmanyvalues) 1/1 (ordered)] {'text__0': 'Botones primarios y títulos destacados', 'question_id__0': 1, 'text__1': 'Fondos de tarjetas', 'question_id__1': 1, 'text__2': 'Texto principal', 'question_id__2': 1, 'text__3': 'Bordes de sección', 'question_id__3': 1}
+2025-10-22 13:30:12,049 - sqlalchemy.engine.Engine - INFO - INSERT INTO questions (question_text, correct_option, quiz_id) VALUES (%(question_text)s, %(correct_option)s, %(quiz_id)s) RETURNING questions.id
+2025-10-22 13:30:12,049 - sqlalchemy.engine.Engine - INFO - [cached since 0.01072s ago] {'question_text': '¿Cuál es el color de fondo principal recomendado para la aplicación?', 'correct_option': '#F5F3FF', 'quiz_id': 1}
+2025-10-22 13:30:12,050 - sqlalchemy.engine.Engine - INFO - INSERT INTO options (text, question_id) SELECT p0::VARCHAR, p1::INTEGER FROM (VALUES (%(text__0)s, %(question_id__0)s, 0), (%(text__1)s, %(question_id__1)s, 1), (%(text__2)s, %(question_id__2)s, 2), (%(text__3)s, %(question_id__3)s, 3)) AS imp_sen(p0, p1, sen_counter) ORDER BY sen_counter RETURNING options.id, options.id AS id__1
+2025-10-22 13:30:12,050 - sqlalchemy.engine.Engine - INFO - [cached since 0.007354s ago (insertmanyvalues) 1/1 (ordered)] {'text__0': '#5B21B6', 'question_id__0': 2, 'text__1': '#A78BFA', 'question_id__1': 2, 'text__2': '#DDD6FE', 'question_id__2': 2, 'text__3': '#F5F3FF', 'question_id__3': 2}
+2025-10-22 13:30:12,051 - sqlalchemy.engine.Engine - INFO - INSERT INTO questions (question_text, correct_option, quiz_id) VALUES (%(question_text)s, %(correct_option)s, %(quiz_id)s) RETURNING questions.id
+2025-10-22 13:30:12,051 - sqlalchemy.engine.Engine - INFO - [cached since 0.01295s ago] {'question_text': 'Para el texto principal, ¿qué color se debe utilizar según la guía?', 'correct_option': '#1F1F1F', 'quiz_id': 1}
+2025-10-22 13:30:12,051 - sqlalchemy.engine.Engine - INFO - INSERT INTO options (text, question_id) SELECT p0::VARCHAR, p1::INTEGER FROM (VALUES (%(text__0)s, %(question_id__0)s, 0), (%(text__1)s, %(question_id__1)s, 1), (%(text__2)s, %(question_id__2)s, 2), (%(text__3)s, %(question_id__3)s, 3)) AS imp_sen(p0, p1, sen_counter) ORDER BY sen_counter RETURNING options.id, options.id AS id__1
+2025-10-22 13:30:12,052 - sqlalchemy.engine.Engine - INFO - [cached since 0.009403s ago (insertmanyvalues) 1/1 (ordered)] {'text__0': '#1F1F1F', 'question_id__0': 3, 'text__1': '#F5F3FF', 'question_id__1': 3, 'text__2': '#FFFFFF', 'question_id__2': 3, 'text__3': '#DDD6FE', 'question_id__3': 3}
+2025-10-22 13:30:12,053 - sqlalchemy.engine.Engine - INFO - INSERT INTO questions (question_text, correct_option, quiz_id) VALUES (%(question_text)s, %(correct_option)s, %(quiz_id)s) RETURNING questions.id
+2025-10-22 13:30:12,053 - sqlalchemy.engine.Engine - INFO - [cached since 0.01485s ago] {'question_text': '¿Qué elemento visual utiliza el color #A78BFA?', 'correct_option': 'Botones secundarios', 'quiz_id': 1}
+2025-10-22 13:30:12,053 - sqlalchemy.engine.Engine - INFO - INSERT INTO options (text, question_id) SELECT p0::VARCHAR, p1::INTEGER FROM (VALUES (%(text__0)s, %(question_id__0)s, 0), (%(text__1)s, %(question_id__1)s, 1), (%(text__2)s, %(question_id__2)s, 2), (%(text__3)s, %(question_id__3)s, 3)) AS imp_sen(p0, p1, sen_counter) ORDER BY sen_counter RETURNING options.id, options.id AS id__1
+2025-10-22 13:30:12,053 - sqlalchemy.engine.Engine - INFO - [cached since 0.0113s ago (insertmanyvalues) 1/1 (ordered)] {'text__0': '#6D28D9', 'question_id__0': 4, 'text__1': '#A78BFA', 'question_id__1': 4, 'text__2': '#1F1F1F', 'question_id__2': 4, 'text__3': '#DDD6FE', 'question_id__3': 4}
+2025-10-22 13:30:12,054 - sqlalchemy.engine.Engine - INFO - INSERT INTO questions (question_text, correct_option, quiz_id) VALUES (%(question_text)s, %(correct_option)s, %(quiz_id)s) RETURNING questions.id
+2025-10-22 13:30:12,054 - sqlalchemy.engine.Engine - INFO - [cached since 0.0166s ago] {'question_text': '¿Qué color de fondo se recomienda para las tarjetas (cards) en la interfaz?', 'correct_option': '#FFFFFF', 'quiz_id': 1}
+2025-10-22 13:30:12,055 - sqlalchemy.engine.Engine - INFO - INSERT INTO options (text, question_id) SELECT p0::VARCHAR, p1::INTEGER FROM (VALUES (%(text__0)s, %(question_id__0)s, 0), (%(text__1)s, %(question_id__1)s, 1), (%(text__2)s, %(question_id__2)s, 2), (%(text__3)s, %(question_id__3)s, 3)) AS imp_sen(p0, p1, sen_counter) ORDER BY sen_counter RETURNING options.id, options.id AS id__1
+2025-10-22 13:30:12,055 - sqlalchemy.engine.Engine - INFO - [cached since 0.01302s ago (insertmanyvalues) 1/1 (ordered)] {'text__0': 'Botones primarios', 'question_id__0': 5, 'text__1': 'Botones secundarios', 'question_id__1': 5, 'text__2': 'Bordes de tarjetas', 'question_id__2': 5, 'text__3': 'Títulos destacados', 'question_id__3': 5}
+2025-10-22 13:30:12,056 - sqlalchemy.engine.Engine - INFO - INSERT INTO options (text, question_id) SELECT p0::VARCHAR, p1::INTEGER FROM (VALUES (%(text__0)s, %(question_id__0)s, 0), (%(text__1)s, %(question_id__1)s, 1), (%(text__2)s, %(question_id__2)s, 2), (%(text__3)s, %(question_id__3)s, 3)) AS imp_sen(p0, p1, sen_counter) ORDER BY sen_counter RETURNING options.id, options.id AS id__1
+2025-10-22 13:30:12,056 - sqlalchemy.engine.Engine - INFO - [cached since 0.01408s ago (insertmanyvalues) 1/1 (ordered)] {'text__0': 'Transparente', 'question_id__0': 6, 'text__1': '#FFFFFF', 'question_id__1': 6, 'text__2': '#F5F3FF', 'question_id__2': 6, 'text__3': '#1F1F1F', 'question_id__3': 6}
+2025-10-22 13:30:12,056 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:30:12,060 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:30:12,063 - sqlalchemy.engine.Engine - INFO - SELECT quizzes.id, quizzes.title, quizzes.document_id 
+FROM quizzes 
+WHERE quizzes.id = %(pk_1)s
+2025-10-22 13:30:12,064 - sqlalchemy.engine.Engine - INFO - [generated in 0.00074s] {'pk_1': 1}
+2025-10-22 13:30:12,067 - sqlalchemy.engine.Engine - INFO - SELECT questions.id AS questions_id, questions.question_text AS questions_question_text, questions.correct_option AS questions_correct_option, questions.quiz_id AS questions_quiz_id 
+FROM questions 
+WHERE %(param_1)s = questions.quiz_id
+2025-10-22 13:30:12,067 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] {'param_1': 1}
+2025-10-22 13:30:12,069 - sqlalchemy.engine.Engine - INFO - SELECT options.id AS options_id, options.text AS options_text, options.question_id AS options_question_id 
+FROM options 
+WHERE %(param_1)s = options.question_id
+2025-10-22 13:30:12,069 - sqlalchemy.engine.Engine - INFO - [generated in 0.00025s] {'param_1': 1}
+2025-10-22 13:30:12,070 - sqlalchemy.engine.Engine - INFO - SELECT options.id AS options_id, options.text AS options_text, options.question_id AS options_question_id 
+FROM options 
+WHERE %(param_1)s = options.question_id
+2025-10-22 13:30:12,070 - sqlalchemy.engine.Engine - INFO - [cached since 0.001083s ago] {'param_1': 2}
+2025-10-22 13:30:12,071 - sqlalchemy.engine.Engine - INFO - SELECT options.id AS options_id, options.text AS options_text, options.question_id AS options_question_id 
+FROM options 
+WHERE %(param_1)s = options.question_id
+2025-10-22 13:30:12,071 - sqlalchemy.engine.Engine - INFO - [cached since 0.001784s ago] {'param_1': 3}
+2025-10-22 13:30:12,071 - sqlalchemy.engine.Engine - INFO - SELECT options.id AS options_id, options.text AS options_text, options.question_id AS options_question_id 
+FROM options 
+WHERE %(param_1)s = options.question_id
+2025-10-22 13:30:12,071 - sqlalchemy.engine.Engine - INFO - [cached since 0.00265s ago] {'param_1': 4}
+2025-10-22 13:30:12,072 - sqlalchemy.engine.Engine - INFO - SELECT options.id AS options_id, options.text AS options_text, options.question_id AS options_question_id 
+FROM options 
+WHERE %(param_1)s = options.question_id
+2025-10-22 13:30:12,072 - sqlalchemy.engine.Engine - INFO - [cached since 0.003513s ago] {'param_1': 5}
+2025-10-22 13:30:12,073 - sqlalchemy.engine.Engine - INFO - SELECT options.id AS options_id, options.text AS options_text, options.question_id AS options_question_id 
+FROM options 
+WHERE %(param_1)s = options.question_id
+2025-10-22 13:30:12,073 - sqlalchemy.engine.Engine - INFO - [cached since 0.004169s ago] {'param_1': 6}
+2025-10-22 13:30:12,075 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:38:53,246 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:38:53,247 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:38:53,247 - sqlalchemy.engine.Engine - INFO - [cached since 539.8s ago] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:38:53,250 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id AS chat_histories_id, chat_histories.user_id AS chat_histories_user_id, chat_histories.document_id AS chat_histories_document_id, chat_histories.message AS chat_histories_message, chat_histories.response AS chat_histories_response, chat_histories.timestamp AS chat_histories_timestamp 
+FROM chat_histories 
+WHERE chat_histories.document_id = %(document_id_1)s AND chat_histories.user_id = %(user_id_1)s ORDER BY chat_histories.timestamp DESC 
+ LIMIT %(param_1)s
+2025-10-22 13:38:53,250 - sqlalchemy.engine.Engine - INFO - [generated in 0.00053s] {'document_id_1': 1, 'user_id_1': 1, 'param_1': 10}
+2025-10-22 13:38:53,618 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:38:53,621 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-7bc7e7cc-5ee4-4541-b348-362be7e9a498', 'json_data': {'messages': [{'role': 'system', 'content': '\n            Eres un asistente educativo experto. Responde preguntas sobre el siguiente documento.\n            \n            DOCUMENTO:\n            Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n            \n            INSTRUCCIONES:\n            - Responde ÚNICAMENTE basándote en la información del documento\n            - Si la información no está en el documento, indícalo claramente\n            - Sé conciso y claro en tus respuestas\n            - Para resúmenes o explicaciones, no excedas 150 palabras\n            - Mantén un tono profesional y educativo\n            '}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}], 'model': 'meta-llama/llama-4-maverick:free', 'max_tokens': 1000, 'temperature': 0.7}}
+2025-10-22 13:38:53,623 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:38:57,325 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "200 OK" Headers({'date': 'Wed, 22 Oct 2025 18:39:57 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992b1ec198e40172-BOG'})
+2025-10-22 13:38:57,326 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:38:57,334 - sqlalchemy.engine.Engine - INFO - INSERT INTO chat_histories (user_id, document_id, message, response, timestamp) VALUES (%(user_id)s, %(document_id)s, %(message)s, %(response)s, %(timestamp)s) RETURNING chat_histories.id
+2025-10-22 13:38:57,334 - sqlalchemy.engine.Engine - INFO - [generated in 0.00083s] {'user_id': 1, 'document_id': 1, 'message': 'que me puedes decir del documento ?', 'response': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores principal y proporciona reglas generales p ... (201 characters truncated) ... a el fondo general de la aplicación. También ofrece ejemplos visuales de cómo integrar estos colores en elementos como el header, tarjetas y botones.', 'timestamp': datetime.datetime(2025, 10, 22, 13, 38, 57, 334196)}
+2025-10-22 13:38:57,347 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:38:57,350 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:38:57,351 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id, chat_histories.user_id, chat_histories.document_id, chat_histories.message, chat_histories.response, chat_histories.timestamp 
+FROM chat_histories 
+WHERE chat_histories.id = %(pk_1)s
+2025-10-22 13:38:57,352 - sqlalchemy.engine.Engine - INFO - [generated in 0.00050s] {'pk_1': 2}
+2025-10-22 13:38:57,355 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:39:14,691 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:39:14,693 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:39:14,694 - sqlalchemy.engine.Engine - INFO - [cached since 561.3s ago] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:39:14,697 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id AS chat_histories_id, chat_histories.user_id AS chat_histories_user_id, chat_histories.document_id AS chat_histories_document_id, chat_histories.message AS chat_histories_message, chat_histories.response AS chat_histories_response, chat_histories.timestamp AS chat_histories_timestamp 
+FROM chat_histories 
+WHERE chat_histories.document_id = %(document_id_1)s AND chat_histories.user_id = %(user_id_1)s ORDER BY chat_histories.timestamp DESC 
+ LIMIT %(param_1)s
+2025-10-22 13:39:14,697 - sqlalchemy.engine.Engine - INFO - [cached since 21.45s ago] {'document_id_1': 1, 'user_id_1': 1, 'param_1': 10}
+2025-10-22 13:39:15,024 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:39:15,026 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-38ea7f6c-f8f3-48b7-b760-6a8a2233c69d', 'json_data': {'messages': [{'role': 'system', 'content': '\n            Eres un asistente educativo experto. Responde preguntas sobre el siguiente documento.\n            \n            DOCUMENTO:\n            Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n            \n            INSTRUCCIONES:\n            - Responde ÚNICAMENTE basándote en la información del documento\n            - Si la información no está en el documento, indícalo claramente\n            - Sé conciso y claro en tus respuestas\n            - Para resúmenes o explicaciones, no excedas 150 palabras\n            - Mantén un tono profesional y educativo\n            '}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores principal y proporciona reglas generales para su aplicación en la interfaz de la aplicación. Incluye detalles sobre el uso específico de cada color, como el morado principal para botones primarios y títulos destacados, y el fondo muy claro para el fondo general de la aplicación. También ofrece ejemplos visuales de cómo integrar estos colores en elementos como el header, tarjetas y botones.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'user', 'content': 'el documento de que trata ?'}], 'model': 'meta-llama/llama-4-maverick:free', 'max_tokens': 1000, 'temperature': 0.7}}
+2025-10-22 13:39:15,027 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:39:17,408 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "200 OK" Headers({'date': 'Wed, 22 Oct 2025 18:40:17 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992b1f461a74603c-BOG'})
+2025-10-22 13:39:17,408 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:39:17,410 - sqlalchemy.engine.Engine - INFO - INSERT INTO chat_histories (user_id, document_id, message, response, timestamp) VALUES (%(user_id)s, %(document_id)s, %(message)s, %(response)s, %(timestamp)s) RETURNING chat_histories.id
+2025-10-22 13:39:17,411 - sqlalchemy.engine.Engine - INFO - [cached since 20.08s ago] {'user_id': 1, 'document_id': 1, 'message': 'el documento de que trata ?', 'response': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores y proporciona reglas para su aplicación en la interfaz de la aplicación, incluyendo detalles sobre el uso de cada color y ejemplos visuales.', 'timestamp': datetime.datetime(2025, 10, 22, 13, 39, 17, 410905)}
+2025-10-22 13:39:17,413 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:39:17,419 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:39:17,420 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id, chat_histories.user_id, chat_histories.document_id, chat_histories.message, chat_histories.response, chat_histories.timestamp 
+FROM chat_histories 
+WHERE chat_histories.id = %(pk_1)s
+2025-10-22 13:39:17,422 - sqlalchemy.engine.Engine - INFO - [cached since 20.07s ago] {'pk_1': 3}
+2025-10-22 13:39:17,426 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:39:57,436 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:39:57,436 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:39:57,437 - sqlalchemy.engine.Engine - INFO - [cached since 604s ago] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:39:57,438 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id AS chat_histories_id, chat_histories.user_id AS chat_histories_user_id, chat_histories.document_id AS chat_histories_document_id, chat_histories.message AS chat_histories_message, chat_histories.response AS chat_histories_response, chat_histories.timestamp AS chat_histories_timestamp 
+FROM chat_histories 
+WHERE chat_histories.document_id = %(document_id_1)s AND chat_histories.user_id = %(user_id_1)s ORDER BY chat_histories.timestamp DESC 
+ LIMIT %(param_1)s
+2025-10-22 13:39:57,438 - sqlalchemy.engine.Engine - INFO - [cached since 64.19s ago] {'document_id_1': 1, 'user_id_1': 1, 'param_1': 20}
+2025-10-22 13:39:57,439 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:40:38,837 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:40:38,837 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:40:38,837 - sqlalchemy.engine.Engine - INFO - [cached since 645.4s ago] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:40:38,838 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id AS chat_histories_id, chat_histories.user_id AS chat_histories_user_id, chat_histories.document_id AS chat_histories_document_id, chat_histories.message AS chat_histories_message, chat_histories.response AS chat_histories_response, chat_histories.timestamp AS chat_histories_timestamp 
+FROM chat_histories 
+WHERE chat_histories.document_id = %(document_id_1)s AND chat_histories.user_id = %(user_id_1)s ORDER BY chat_histories.timestamp DESC 
+ LIMIT %(param_1)s
+2025-10-22 13:40:38,839 - sqlalchemy.engine.Engine - INFO - [cached since 105.6s ago] {'document_id_1': 1, 'user_id_1': 1, 'param_1': 10}
+2025-10-22 13:40:39,003 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:40:39,005 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-aee6a3df-a595-4776-84fa-dcf3c7a66ee0', 'json_data': {'messages': [{'role': 'system', 'content': '\n            Eres un asistente educativo experto. Responde preguntas sobre el siguiente documento.\n            \n            DOCUMENTO:\n            Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n            \n            INSTRUCCIONES:\n            - Responde ÚNICAMENTE basándote en la información del documento\n            - Si la información no está en el documento, indícalo claramente\n            - Sé conciso y claro en tus respuestas\n            - Para resúmenes o explicaciones, no excedas 150 palabras\n            - Mantén un tono profesional y educativo\n            '}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores y proporciona reglas para su aplicación en la interfaz de la aplicación, incluyendo detalles sobre el uso de cada color y ejemplos visuales.'}, {'role': 'user', 'content': 'el documento de que trata ?'}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores principal y proporciona reglas generales para su aplicación en la interfaz de la aplicación. Incluye detalles sobre el uso específico de cada color, como el morado principal para botones primarios y títulos destacados, y el fondo muy claro para el fondo general de la aplicación. También ofrece ejemplos visuales de cómo integrar estos colores en elementos como el header, tarjetas y botones.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'user', 'content': 'que colores utilizare ?'}], 'model': 'meta-llama/llama-4-maverick:free', 'max_tokens': 1000, 'temperature': 0.7}}
+2025-10-22 13:40:39,005 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:40:41,158 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "403 Forbidden" Headers({'date': 'Wed, 22 Oct 2025 18:41:42 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992b21555e063332-BOG'})
+2025-10-22 13:40:41,158 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:40:41,158 - openai._base_client - DEBUG - Encountered httpx.HTTPStatusError
+Traceback (most recent call last):
+  File "c:\Users\innovacion\Desktop\Leviatan\Leviatan_backend\Leviatan_Backend\.venv\Lib\site-packages\openai\_base_client.py", line 1574, in request
+    response.raise_for_status()
+  File "c:\Users\innovacion\Desktop\Leviatan\Leviatan_backend\Leviatan_Backend\.venv\Lib\site-packages\httpx\_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '403 Forbidden' for url 'https://openrouter.ai/api/v1/chat/completions'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2025-10-22 13:40:41,169 - openai._base_client - DEBUG - Not retrying
+2025-10-22 13:40:41,170 - openai._base_client - DEBUG - Re-raising status error
+2025-10-22 13:40:41,172 - App.Utils.open_ai - ERROR - Error en chat_with_document: Error code: 403 - {'error': {'message': 'meta-llama/llama-4-maverick-17b-128e-instruct:free requires moderation on Meta. Your input was flagged for "misc". No credits were charged.', 'code': 403, 'metadata': {'reasons': ['misc'], 'flagged_input': '\n            Eres un asistente educativo experto. ...des decir del documento ?\n\nque colores utilizare ?', 'provider_name': None, 'model_slug': 'meta-llama/llama-4-maverick-17b-128e-instruct:free'}}, 'user_id': 'user_2uJaAs2ReegAJHPSw4vtxU8j0zx'}
+2025-10-22 13:40:41,172 - sqlalchemy.engine.Engine - INFO - INSERT INTO chat_histories (user_id, document_id, message, response, timestamp) VALUES (%(user_id)s, %(document_id)s, %(message)s, %(response)s, %(timestamp)s) RETURNING chat_histories.id
+2025-10-22 13:40:41,173 - sqlalchemy.engine.Engine - INFO - [cached since 103.8s ago] {'user_id': 1, 'document_id': 1, 'message': 'que colores utilizare ?', 'response': 'Lo siento, ha ocurrido un error al procesar tu solicitud.', 'timestamp': datetime.datetime(2025, 10, 22, 13, 40, 41, 172245)}
+2025-10-22 13:40:41,174 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:40:41,174 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:40:41,175 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id, chat_histories.user_id, chat_histories.document_id, chat_histories.message, chat_histories.response, chat_histories.timestamp 
+FROM chat_histories 
+WHERE chat_histories.id = %(pk_1)s
+2025-10-22 13:40:41,175 - sqlalchemy.engine.Engine - INFO - [cached since 103.8s ago] {'pk_1': 4}
+2025-10-22 13:40:41,176 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:41:43,891 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:41:43,899 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:41:43,899 - sqlalchemy.engine.Engine - INFO - [cached since 710.5s ago] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:41:43,900 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id AS chat_histories_id, chat_histories.user_id AS chat_histories_user_id, chat_histories.document_id AS chat_histories_document_id, chat_histories.message AS chat_histories_message, chat_histories.response AS chat_histories_response, chat_histories.timestamp AS chat_histories_timestamp 
+FROM chat_histories 
+WHERE chat_histories.document_id = %(document_id_1)s AND chat_histories.user_id = %(user_id_1)s ORDER BY chat_histories.timestamp DESC 
+ LIMIT %(param_1)s
+2025-10-22 13:41:43,900 - sqlalchemy.engine.Engine - INFO - [cached since 170.7s ago] {'document_id_1': 1, 'user_id_1': 1, 'param_1': 10}
+2025-10-22 13:41:44,064 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:41:44,064 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-956941d7-bf68-46c7-9943-b28f064d1574', 'json_data': {'messages': [{'role': 'system', 'content': '\n            Eres un asistente educativo experto. Responde preguntas sobre el siguiente documento.\n            \n            DOCUMENTO:\n            Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n            \n            INSTRUCCIONES:\n            - Responde ÚNICAMENTE basándote en la información del documento\n            - Si la información no está en el documento, indícalo claramente\n            - Sé conciso y claro en tus respuestas\n            - Para resúmenes o explicaciones, no excedas 150 palabras\n            - Mantén un tono profesional y educativo\n            '}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que colores utilizare ?'}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores y proporciona reglas para su aplicación en la interfaz de la aplicación, incluyendo detalles sobre el uso de cada color y ejemplos visuales.'}, {'role': 'user', 'content': 'el documento de que trata ?'}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores principal y proporciona reglas generales para su aplicación en la interfaz de la aplicación. Incluye detalles sobre el uso específico de cada color, como el morado principal para botones primarios y títulos destacados, y el fondo muy claro para el fondo general de la aplicación. También ofrece ejemplos visuales de cómo integrar estos colores en elementos como el header, tarjetas y botones.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'user', 'content': 'que colores utilizare ?'}], 'model': 'meta-llama/llama-4-maverick:free', 'max_tokens': 1000, 'temperature': 0.7}}
+2025-10-22 13:41:44,064 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:41:45,566 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "403 Forbidden" Headers({'date': 'Wed, 22 Oct 2025 18:42:46 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992b22e9eafab83c-BOG'})
+2025-10-22 13:41:45,567 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:41:45,567 - openai._base_client - DEBUG - Encountered httpx.HTTPStatusError
+Traceback (most recent call last):
+  File "c:\Users\innovacion\Desktop\Leviatan\Leviatan_backend\Leviatan_Backend\.venv\Lib\site-packages\openai\_base_client.py", line 1574, in request
+    response.raise_for_status()
+  File "c:\Users\innovacion\Desktop\Leviatan\Leviatan_backend\Leviatan_Backend\.venv\Lib\site-packages\httpx\_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '403 Forbidden' for url 'https://openrouter.ai/api/v1/chat/completions'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2025-10-22 13:41:45,568 - openai._base_client - DEBUG - Not retrying
+2025-10-22 13:41:45,568 - openai._base_client - DEBUG - Re-raising status error
+2025-10-22 13:41:45,569 - App.Utils.open_ai - ERROR - Error en chat_with_document: Error code: 403 - {'error': {'message': 'meta-llama/llama-4-maverick-17b-128e-instruct:free requires moderation on Meta. Your input was flagged for "misc". No credits were charged.', 'code': 403, 'metadata': {'reasons': ['misc'], 'flagged_input': '\n            Eres un asistente educativo experto. ...des decir del documento ?\n\nque colores utilizare ?', 'provider_name': None, 'model_slug': 'meta-llama/llama-4-maverick-17b-128e-instruct:free'}}, 'user_id': 'user_2uJaAs2ReegAJHPSw4vtxU8j0zx'}
+2025-10-22 13:41:45,569 - sqlalchemy.engine.Engine - INFO - INSERT INTO chat_histories (user_id, document_id, message, response, timestamp) VALUES (%(user_id)s, %(document_id)s, %(message)s, %(response)s, %(timestamp)s) RETURNING chat_histories.id
+2025-10-22 13:41:45,569 - sqlalchemy.engine.Engine - INFO - [cached since 168.2s ago] {'user_id': 1, 'document_id': 1, 'message': 'que colores utilizare ?', 'response': 'Lo siento, ha ocurrido un error al procesar tu solicitud.', 'timestamp': datetime.datetime(2025, 10, 22, 13, 41, 45, 569152)}
+2025-10-22 13:41:45,570 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:41:45,574 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:41:45,575 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id, chat_histories.user_id, chat_histories.document_id, chat_histories.message, chat_histories.response, chat_histories.timestamp 
+FROM chat_histories 
+WHERE chat_histories.id = %(pk_1)s
+2025-10-22 13:41:45,575 - sqlalchemy.engine.Engine - INFO - [cached since 168.2s ago] {'pk_1': 5}
+2025-10-22 13:41:45,576 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:44:56,906 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:44:56,907 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:44:56,910 - sqlalchemy.engine.Engine - INFO - [cached since 903.5s ago] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:44:56,913 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id AS chat_histories_id, chat_histories.user_id AS chat_histories_user_id, chat_histories.document_id AS chat_histories_document_id, chat_histories.message AS chat_histories_message, chat_histories.response AS chat_histories_response, chat_histories.timestamp AS chat_histories_timestamp 
+FROM chat_histories 
+WHERE chat_histories.document_id = %(document_id_1)s AND chat_histories.user_id = %(user_id_1)s ORDER BY chat_histories.timestamp DESC 
+ LIMIT %(param_1)s
+2025-10-22 13:44:56,913 - sqlalchemy.engine.Engine - INFO - [cached since 363.7s ago] {'document_id_1': 1, 'user_id_1': 1, 'param_1': 10}
+2025-10-22 13:44:57,235 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:44:57,240 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-ca16ed6e-34ba-44a7-be08-6ae574701893', 'json_data': {'messages': [{'role': 'system', 'content': '\n            Eres un asistente educativo experto. Responde preguntas sobre el siguiente documento.\n            \n            DOCUMENTO:\n            Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n            \n            INSTRUCCIONES:\n            - Responde ÚNICAMENTE basándote en la información del documento\n            - Si la información no está en el documento, indícalo claramente\n            - Sé conciso y claro en tus respuestas\n            - Para resúmenes o explicaciones, no excedas 150 palabras\n            - Mantén un tono profesional y educativo\n            '}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que colores utilizare ?'}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que colores utilizare ?'}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores y proporciona reglas para su aplicación en la interfaz de la aplicación, incluyendo detalles sobre el uso de cada color y ejemplos visuales.'}, {'role': 'user', 'content': 'el documento de que trata ?'}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores principal y proporciona reglas generales para su aplicación en la interfaz de la aplicación. Incluye detalles sobre el uso específico de cada color, como el morado principal para botones primarios y títulos destacados, y el fondo muy claro para el fondo general de la aplicación. También ofrece ejemplos visuales de cómo integrar estos colores en elementos como el header, tarjetas y botones.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'user', 'content': 'que colores utiliza en el documento ?'}], 'model': 'meta-llama/llama-4-maverick:free', 'max_tokens': 1000, 'temperature': 0.7}}
+2025-10-22 13:44:57,242 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:45:00,851 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "200 OK" Headers({'date': 'Wed, 22 Oct 2025 18:46:00 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992b27a2eb9a8e09-BOG'})
+2025-10-22 13:45:00,851 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:45:00,852 - sqlalchemy.engine.Engine - INFO - INSERT INTO chat_histories (user_id, document_id, message, response, timestamp) VALUES (%(user_id)s, %(document_id)s, %(message)s, %(response)s, %(timestamp)s) RETURNING chat_histories.id
+2025-10-22 13:45:00,852 - sqlalchemy.engine.Engine - INFO - [cached since 363.5s ago] {'user_id': 1, 'document_id': 1, 'message': 'que colores utiliza en el documento ?', 'response': 'El documento describe una paleta de colores que incluye:\n\n1. Morado principal (#6D28D9)\n2. Morado claro (#A78BFA)\n3. Lavanda suave (#DDD6FE)\n4.  ... (61 characters truncated) ... ro (#1F1F1F)\n\nEstos colores se utilizan para diferentes elementos de la interfaz de la aplicación, como botones, títulos, fondos, tarjetas y texto.', 'timestamp': datetime.datetime(2025, 10, 22, 13, 45, 0, 852349)}
+2025-10-22 13:45:00,854 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:45:00,859 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:45:00,860 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id, chat_histories.user_id, chat_histories.document_id, chat_histories.message, chat_histories.response, chat_histories.timestamp 
+FROM chat_histories 
+WHERE chat_histories.id = %(pk_1)s
+2025-10-22 13:45:00,861 - sqlalchemy.engine.Engine - INFO - [cached since 363.5s ago] {'pk_1': 6}
+2025-10-22 13:45:00,865 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:45:02,971 - sqlalchemy.engine.Engine - INFO - select pg_catalog.version()
+2025-10-22 13:45:02,972 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:45:02,973 - sqlalchemy.engine.Engine - INFO - select current_schema()
+2025-10-22 13:45:02,973 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:45:02,973 - sqlalchemy.engine.Engine - INFO - show standard_conforming_strings
+2025-10-22 13:45:02,973 - sqlalchemy.engine.Engine - INFO - [raw sql] {}
+2025-10-22 13:45:02,974 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:45:02,977 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,977 - sqlalchemy.engine.Engine - INFO - [generated in 0.00049s] {'table_name': 'users', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,980 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,980 - sqlalchemy.engine.Engine - INFO - [cached since 0.002639s ago] {'table_name': 'subjects', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,981 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,981 - sqlalchemy.engine.Engine - INFO - [cached since 0.003558s ago] {'table_name': 'documents', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,981 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,982 - sqlalchemy.engine.Engine - INFO - [cached since 0.004335s ago] {'table_name': 'summaries', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,982 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,982 - sqlalchemy.engine.Engine - INFO - [cached since 0.005003s ago] {'table_name': 'flashcards', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,983 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,983 - sqlalchemy.engine.Engine - INFO - [cached since 0.006031s ago] {'table_name': 'quizzes', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,984 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,985 - sqlalchemy.engine.Engine - INFO - [cached since 0.007539s ago] {'table_name': 'questions', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,985 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,989 - sqlalchemy.engine.Engine - INFO - [cached since 0.01054s ago] {'table_name': 'options', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,989 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,990 - sqlalchemy.engine.Engine - INFO - [cached since 0.01276s ago] {'table_name': 'quiz_attempts', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,992 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,993 - sqlalchemy.engine.Engine - INFO - [cached since 0.01551s ago] {'table_name': 'quiz_answers', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,994 - sqlalchemy.engine.Engine - INFO - SELECT pg_catalog.pg_class.relname 
+FROM pg_catalog.pg_class JOIN pg_catalog.pg_namespace ON pg_catalog.pg_namespace.oid = pg_catalog.pg_class.relnamespace 
+WHERE pg_catalog.pg_class.relname = %(table_name)s AND pg_catalog.pg_class.relkind = ANY (ARRAY[%(param_1)s, %(param_2)s, %(param_3)s, %(param_4)s, %(param_5)s]) AND pg_catalog.pg_table_is_visible(pg_catalog.pg_class.oid) AND pg_catalog.pg_namespace.nspname != %(nspname_1)s
+2025-10-22 13:45:02,995 - sqlalchemy.engine.Engine - INFO - [cached since 0.01755s ago] {'table_name': 'chat_histories', 'param_1': 'r', 'param_2': 'p', 'param_3': 'f', 'param_4': 'v', 'param_5': 'm', 'nspname_1': 'pg_catalog'}
+2025-10-22 13:45:02,997 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:45:18,958 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:45:18,965 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:45:18,967 - sqlalchemy.engine.Engine - INFO - [generated in 0.00133s] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:45:18,970 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id AS chat_histories_id, chat_histories.user_id AS chat_histories_user_id, chat_histories.document_id AS chat_histories_document_id, chat_histories.message AS chat_histories_message, chat_histories.response AS chat_histories_response, chat_histories.timestamp AS chat_histories_timestamp 
+FROM chat_histories 
+WHERE chat_histories.document_id = %(document_id_1)s AND chat_histories.user_id = %(user_id_1)s ORDER BY chat_histories.timestamp DESC 
+ LIMIT %(param_1)s
+2025-10-22 13:45:18,971 - sqlalchemy.engine.Engine - INFO - [generated in 0.00045s] {'document_id_1': 1, 'user_id_1': 1, 'param_1': 10}
+2025-10-22 13:45:19,410 - App.Utils.open_ai - INFO - Cliente OpenRouter inicializado: deepseek/deepseek-chat-v3.1:free
+2025-10-22 13:45:19,999 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-8a896216-3495-4f69-a4d6-1f239e224f11', 'json_data': {'messages': [{'role': 'system', 'content': '\n            Eres un asistente educativo experto. Responde preguntas sobre el siguiente documento.\n            \n            DOCUMENTO:\n            Manual de Colores – Asistente de Estudio con IA\n1. Paleta de colores principal\nRol\nColor\nHex\nMorado principal\n#6D28D9\nMorado claro\n#A78BFA\nLavanda suave\n#DDD6FE\nFondo muy claro\n#F5F3FF\nBlanco\n#FFFFFF\nTexto oscuro\n#1F1F1F\n2. Usos específicos por color\nMorado principal (#6D28D9): Botones primarios, títulos destacados. Hover recomendado:\n#5B21B6.\nMorado claro (#A78BFA): Botones secundarios y resaltados. Hover recomendado: #9333EA.\nLavanda suave (#DDD6FE): Bordes y fondos de tarjetas.\nFondo muy claro (#F5F3FF): Fondo general de la app.\nBlanco (#FFFFFF): Paneles, tarjetas y footer.\nTexto oscuro (#1F1F1F): Texto principal para máxima legibilidad.\n3. Reglas generales de aplicación\n- Botones primarios: #6D28D9 con texto blanco. Hover → #5B21B6.\n- Botones secundarios: #A78BFA con texto oscuro. Hover → #9333EA.\n- Fondos principales: #F5F3FF.\n- Tarjetas: Fondo #FFFFFF, borde #DDD6FE, títulos en morado.\n- Texto: Siempre #1F1F1F.\n- Sombras: Usar rgba(109, 40, 217, 0.1–0.3) para coherencia visual.\n4. Ejemplo visual integrado\n- Header: Gradiente entre #6D28D9 y #A78BFA.\n- Hero title: Color #6D28D9.\n- Cards: Fondo blanco con borde lavanda y sombra suave.\n- Footer: Fondo blanco con borde superior lavanda.\n- Botones: primario en #6D28D9 y secundario en #A78BFA.\n\n\n\n            \n            INSTRUCCIONES:\n            - Responde ÚNICAMENTE basándote en la información del documento\n            - Si la información no está en el documento, indícalo claramente\n            - Sé conciso y claro en tus respuestas\n            - Para resúmenes o explicaciones, no excedas 150 palabras\n            - Mantén un tono profesional y educativo\n            '}, {'role': 'assistant', 'content': 'El documento describe una paleta de colores que incluye:\n\n1. Morado principal (#6D28D9)\n2. Morado claro (#A78BFA)\n3. Lavanda suave (#DDD6FE)\n4. Fondo muy claro (#F5F3FF)\n5. Blanco (#FFFFFF)\n6. Texto oscuro (#1F1F1F)\n\nEstos colores se utilizan para diferentes elementos de la interfaz de la aplicación, como botones, títulos, fondos, tarjetas y texto.'}, {'role': 'user', 'content': 'que colores utiliza en el documento ?'}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que colores utilizare ?'}, {'role': 'assistant', 'content': 'Lo siento, ha ocurrido un error al procesar tu solicitud.'}, {'role': 'user', 'content': 'que colores utilizare ?'}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores y proporciona reglas para su aplicación en la interfaz de la aplicación, incluyendo detalles sobre el uso de cada color y ejemplos visuales.'}, {'role': 'user', 'content': 'el documento de que trata ?'}, {'role': 'assistant', 'content': 'El documento es un "Manual de Colores" para un asistente de estudio con IA. Describe una paleta de colores principal y proporciona reglas generales para su aplicación en la interfaz de la aplicación. Incluye detalles sobre el uso específico de cada color, como el morado principal para botones primarios y títulos destacados, y el fondo muy claro para el fondo general de la aplicación. También ofrece ejemplos visuales de cómo integrar estos colores en elementos como el header, tarjetas y botones.'}, {'role': 'user', 'content': 'que me puedes decir del documento ?'}, {'role': 'user', 'content': 'cual es el color principal ?'}], 'model': 'deepseek/deepseek-chat-v3.1:free', 'max_tokens': 1000, 'temperature': 0.7}}
+2025-10-22 13:45:19,999 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-10-22 13:45:29,310 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "200 OK" Headers({'date': 'Wed, 22 Oct 2025 18:46:27 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'content-encoding': 'gzip', 'access-control-allow-origin': '*', 'vary': 'Accept-Encoding', 'permissions-policy': 'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")', 'referrer-policy': 'no-referrer, strict-origin-when-cross-origin', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '992b282f5cffaece-BOG'})
+2025-10-22 13:45:29,311 - openai._base_client - DEBUG - request_id: None
+2025-10-22 13:45:29,322 - sqlalchemy.engine.Engine - INFO - INSERT INTO chat_histories (user_id, document_id, message, response, timestamp) VALUES (%(user_id)s, %(document_id)s, %(message)s, %(response)s, %(timestamp)s) RETURNING chat_histories.id
+2025-10-22 13:45:29,323 - sqlalchemy.engine.Engine - INFO - [generated in 0.00072s] {'user_id': 1, 'document_id': 1, 'message': 'cual es el color principal ?', 'response': 'Según el documento, el color principal es el **Morado principal (#6D28D9)**. Este color se utiliza para elementos destacados como botones primarios y ... (146 characters truncated) ... do códigos de color específicos, reglas de aplicación y ejemplos visuales de cómo implementar estos colores en diferentes componentes de la interfaz.', 'timestamp': datetime.datetime(2025, 10, 22, 13, 45, 29, 322047)}
+2025-10-22 13:45:29,326 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-22 13:45:29,330 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:45:29,332 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id, chat_histories.user_id, chat_histories.document_id, chat_histories.message, chat_histories.response, chat_histories.timestamp 
+FROM chat_histories 
+WHERE chat_histories.id = %(pk_1)s
+2025-10-22 13:45:29,332 - sqlalchemy.engine.Engine - INFO - [generated in 0.00061s] {'pk_1': 7}
+2025-10-22 13:45:29,335 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-22 13:45:38,140 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-22 13:45:38,141 - sqlalchemy.engine.Engine - INFO - SELECT documents.id AS documents_id, documents.title AS documents_title, documents.content AS documents_content, documents.file_path AS documents_file_path, documents.subject_id AS documents_subject_id 
+FROM documents 
+WHERE documents.id = %(id_1)s 
+ LIMIT %(param_1)s
+2025-10-22 13:45:38,142 - sqlalchemy.engine.Engine - INFO - [cached since 19.18s ago] {'id_1': 1, 'param_1': 1}
+2025-10-22 13:45:38,144 - sqlalchemy.engine.Engine - INFO - SELECT chat_histories.id AS chat_histories_id, chat_histories.user_id AS chat_histories_user_id, chat_histories.document_id AS chat_histories_document_id, chat_histories.message AS chat_histories_message, chat_histories.response AS chat_histories_response, chat_histories.timestamp AS chat_histories_timestamp 
+FROM chat_histories 
+WHERE chat_histories.document_id = %(document_id_1)s AND chat_histories.user_id = %(user_id_1)s ORDER BY chat_histories.timestamp DESC 
+ LIMIT %(param_1)s
+2025-10-22 13:45:38,144 - sqlalchemy.engine.Engine - INFO - [cached since 19.17s ago] {'document_id_1': 1, 'user_id_1': 1, 'param_1': 20}
+2025-10-22 13:45:38,147 - sqlalchemy.engine.Engine - INFO - ROLLBACK

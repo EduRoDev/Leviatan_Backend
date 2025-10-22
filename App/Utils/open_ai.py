@@ -32,6 +32,7 @@ class OpenAIClient:
         self.client = AsyncOpenAI(**client_kwargs)
         provider = "OpenRouter" if settings.is_openrouter() else "OpenAI"
         logger.info(f"Cliente {provider} inicializado: {settings.OPENAI_MODEL}")    
+        
     async def _call_openai(self, prompt: str, system_message: str) -> Dict[str, Any]:
         """Método genérico para llamadas a OpenAI con respuesta JSON"""
         try:
@@ -119,6 +120,7 @@ class OpenAIClient:
         except Exception as e:
             logger.error(f"Error en llamada a OpenAI: {e}")
             raise    
+        
     async def generate_summary(self, text: str) -> Dict[str, Any]:
         """
         Genera un resumen del texto
@@ -138,17 +140,17 @@ class OpenAIClient:
         
         prompt = f"""Analiza el siguiente texto y genera un resumen completo y conciso.
 
-FORMATO DE RESPUESTA REQUERIDO (JSON):
-{{"summary": "tu resumen aquí"}}
+        FORMATO DE RESPUESTA REQUERIDO (JSON):
+        {{"summary": "tu resumen aquí"}}
 
-TEXTO A RESUMIR:
-{truncated_text}
+        TEXTO A RESUMIR:
+        {truncated_text}
 
-Responde ÚNICAMENTE con el JSON, sin texto adicional antes o después."""
+        Responde ÚNICAMENTE con el JSON, sin texto adicional antes o después."""
         
         system_message = """Eres un experto en resumir documentos académicos. 
-Tu respuesta DEBE ser ÚNICAMENTE un objeto JSON válido con el formato: {"summary": "texto del resumen"}
-NO incluyas explicaciones, markdown, ni texto adicional. SOLO el JSON."""
+        Tu respuesta DEBE ser ÚNICAMENTE un objeto JSON válido con el formato: {"summary": "texto del resumen"}
+        NO incluyas explicaciones, markdown, ni texto adicional. SOLO el JSON."""
         
         try:
             result = await self._call_openai(prompt, system_message)
@@ -342,7 +344,7 @@ NO incluyas explicaciones, markdown, ni texto adicional. SOLO el JSON."""
             messages.append({"role": "user", "content": user_message})
             
             response = await self.client.chat.completions.create(
-                model=settings.CHAT_MODEL,
+                model=settings.OPENAI_MODEL,
                 messages=messages,
                 temperature=0.7,
                 max_tokens=1000
