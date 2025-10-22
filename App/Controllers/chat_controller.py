@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/chat", tags=["chat"])
 
 class MessageRequest(BaseModel):
-    document_id: int
     message: str
     
 class MessageResponse(BaseModel):
@@ -26,8 +25,10 @@ class MessageResponse(BaseModel):
 class HistoryResponse(BaseModel):
     history: List[MessageResponse]
     document_title: Optional[str] = None
-    
+
+@router.post("/send/{document_id}", response_model=MessageResponse)
 async def send_message(
+    document_id: int,
     request: MessageRequest,
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user)
@@ -36,12 +37,12 @@ async def send_message(
         user_id = current_user["id"]
         chat_service = ChatService(db)
         document_service = DocumentService(db)
-        
-        document = document_service.get_document(user_id, request.document_id)
+
+        document = document_service.get_document(document_id)
         if not document:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Document not found")
-        
-        history_entries = chat_service.get_chat_history(user_id, request.document_id, limit=10)
+
+        history_entries = chat_service.get_chat_history(user_id, document_id, limit=10)
         chat_history = []
         for entry in reversed(history_entries):
             chat_history.append({"role": "user", "content": entry.message})
@@ -56,7 +57,7 @@ async def send_message(
         
         chat_entry = chat_service.save_message(
             user_id=user_id,
-            document_id=request.document_id,
+            document_id=document_id,
             message=request.message,
             response=response
         )
@@ -71,3 +72,31 @@ async def send_message(
     except Exception as e:
         logger.error(f"Error in send_message: {e}")
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
+    
+    
+@router.get("/history/{document_id}", response_model=HistoryResponse)
+async def get_chat_history(
+    document_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):  
+    user_id = current_user["id"]
+    chat_service = ChatService(db)
+    document_service = DocumentService(db)
+    
+    document = document_service.get_document(document_id)
+    if not document:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Document not found")
+    
+    history_entries = chat_service.get_chat_history(user_id, document_id)
+    history_response = [
+        MessageResponse(
+            id=entry.id,
+            message=entry.message,
+            response=entry.response,
+            timestamp=entry.timestamp.isoformat()
+        ) for entry in history_entries
+    ]
+    
+    return HistoryResponse(history=history_response, document_title=document.title)
+    
