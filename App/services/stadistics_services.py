@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func, Integer
 from datetime import datetime
 from typing import List, Dict, Optional
-from App.Models.models import QuizAttempt, Quiz, QuizAnswer, Question, User, Option
+from App.Models.models import QuizAttempt, Quiz, QuizAnswer, Question, User, Option, Document
 
 class StatisticsService:
     def __init__(self, db: Session):
@@ -93,15 +93,17 @@ class StatisticsService:
     def get_user_progress_by_subject(self,user_id:int)->List[Dict]:
         query = self.db.query(
             Quiz.document_id,
+            Document.subject_id,
             func.count(QuizAttempt.id).label('total_attempts'),
             func.avg(QuizAttempt.score).label('average_score'),
-        ).join(QuizAttempt).filter(
+        ).join(QuizAttempt).join(Document, Quiz.document_id == Document.id).filter(
             QuizAttempt.user_id == user_id
-        ).group_by(Quiz.document_id).all()
+        ).group_by(Quiz.document_id, Document.subject_id).all()
         
         return [
             {
                 "document_id":row.document_id,
+                "subject_id":row.subject_id,
                 "total_attempts":row.total_attempts,
                 "average_score":round(row.average_score,2)
             }

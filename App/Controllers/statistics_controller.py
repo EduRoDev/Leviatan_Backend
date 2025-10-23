@@ -38,6 +38,7 @@ class UserStatisticsResponse(BaseModel):
     
 class ProgressBySubjectResponse(BaseModel):
     document_id: int
+    subject_id: int
     total_attempts: int
     average_score: float
     
