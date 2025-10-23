@@ -332,19 +332,18 @@ class OpenAIClient:
             - Responde ÚNICAMENTE basándote en la información del documento
             - Si la información no está en el documento, indícalo claramente
             - Sé conciso y claro en tus respuestas
-            - Para resúmenes o explicaciones, no excedas 150 palabras
+            - Para resúmenes o explicaciones, menos de 150 palabras
             - Mantén un tono profesional y educativo
+            - Las respuestas deben tener un limite de 300 palabras
             """
             
             messages = [{"role": "system", "content": system_prompt}]
             
-            if chat_history:
-                messages.extend(list(reversed(chat_history[-10:])))
             
             messages.append({"role": "user", "content": user_message})
             
             response = await self.client.chat.completions.create(
-                model=settings.OPENAI_MODEL,
+                model=settings.CHAT_MODEL,
                 messages=messages,
                 temperature=0.7,
                 max_tokens=1000
