@@ -6,8 +6,12 @@ import pathlib
 logger = logging.getLogger(__name__)
 
 env_path = pathlib.Path('.env')
-print(f"¿Archivo .env existe? {env_path.exists()}")
-print(f"Ubicación: {env_path.absolute()}")
+if env_path.exists():
+    print(f"✅ Archivo .env encontrado: {env_path.absolute()}")
+    load_dotenv()
+else:
+    print(f"⚠️  Archivo .env NO encontrado (usando variables de entorno del sistema)")
+
 
 load_dotenv()
 
