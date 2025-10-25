@@ -4,17 +4,7 @@ import logging
 import pathlib
 
 logger = logging.getLogger(__name__)
-
-env_path = pathlib.Path('.env')
-if env_path.exists():
-    print(f"✅ Archivo .env encontrado: {env_path.absolute()}")
-    load_dotenv()
-else:
-    print(f"⚠️  Archivo .env NO encontrado (usando variables de entorno del sistema)")
-
-
 load_dotenv()
-
 class Settings:
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
     OPENAI_BASE_URL: str = os.getenv("OPENAI_BASE_URL")
