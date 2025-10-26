@@ -352,8 +352,14 @@ class OpenAIClient:
             if not response.choices or not response.choices[0].message.content:
                 raise ValueError("Respuesta vacía de OpenAI")
             
-            return response.choices[0].message.content.strip()
-            
+            message = response.choices[0].message
+            if message.content:
+                content_str = message.content.strip()
+                if '<｜begin▁of▁sentence｜>' in content_str:
+                    content_str = content_str.split('<｜begin▁of▁sentence｜>')[0].strip()
+                    
+                return content_str
+                
         except Exception as e:
             logger.error(f"Error en chat_with_document: {e}")
             return "Lo siento, ha ocurrido un error al procesar tu solicitud."
