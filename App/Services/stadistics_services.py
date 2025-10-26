@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func, Integer
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Optional
 from App.Models.models import QuizAttempt, Quiz, QuizAnswer, Question, User, Option, Document
 
@@ -30,7 +30,7 @@ class StatisticsService:
             correct_answers=0,
             score=0.0,
             time_taken=time_taken,
-            completed_at= datetime.now()
+            completed_at= datetime.now(timezone.utc)
         )
         
         self.db.add(attempt)
@@ -158,7 +158,7 @@ class StatisticsService:
                 "quiz_id": attempt.quiz_id,
                 "score": attempt.score,
                 "time_taken": attempt.time_taken,
-                "completed_at": attempt.completed_at.strftime("%Y-%m-%d %H:%M:%S")
+                "completed_at": attempt.completed_at.isoformat() if attempt.completed_at.tzinfo else attempt.completed_at.replace(tzinfo=timezone.utc).isoformat()
             }
             for attempt in attempts
         ]
