@@ -27,7 +27,8 @@ class PasswordChangeRequest(BaseModel):
 @router.get("/data", response_model=UserDataResponse)
 def userData(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     auth_service = AuthService(db)
-    user = auth_service.get_user_by_id(current_user["id"])
+    user_id = current_user["id"]
+    user = auth_service.get_user_by_id(user_id) 
     return UserDataResponse(
         name=user.name,
         last_name=user.last_name,
