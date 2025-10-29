@@ -61,8 +61,6 @@ class AuthService():
         
     def get_user_by_id(self, user_id: int) -> User:
         user = self.db.query(User).filter(User.id == user_id).first()
-        if not user:
-            raise ValueError("User not found")
         return user
     
     

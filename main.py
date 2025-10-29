@@ -7,6 +7,7 @@ from App.Controllers import quiz_controller
 from App.Controllers import subject_controller
 from App.Controllers import statistics_controller
 from App.Controllers import chat_controller
+from App.Controllers import user_controller
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from App.Database.database import engine, Base
@@ -38,6 +39,7 @@ app.include_router(flashcard_controller.router)
 app.include_router(quiz_controller.router)
 app.include_router(statistics_controller.router)
 app.include_router(chat_controller.router)
+app.include_router(user_controller.router)
 
 @app.get("/")
 def root():

@@ -16,19 +16,30 @@ class PasswordChangeRequest(BaseModel):
     old_password: str
     new_password: str
 
+class UserDataResponse(BaseModel):
+    id: int
+    name: str
+    last_name: str
+    email: str
 
 
-
-@router.get("/data/{user_id}")
-def userData(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user), user_id: int = None):
+@router.get("/data")
+def userData(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     auth_service = AuthService(db)
+    user_id = current_user["id"]
     user = auth_service.get_user_by_id(user_id) 
-    return user
+    return UserDataResponse(
+        id=user.id,
+        name=user.name,
+        last_name=user.last_name,
+        email=user.email
+    )
 
-@router.put("/edit/{user_id}")
-def editUser(request: UserEditRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user), user_id: int = None):
+@router.put("/edit")
+def editUser(request: UserEditRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     auth_service = AuthService(db)
     try:
+        user_id = current_user["id"]
         user = auth_service.editUser(user_id, request.name, request.last_name, request.email)
         return {
             "message": "User updated successfully",
@@ -42,10 +53,11 @@ def editUser(request: UserEditRequest, db: Session = Depends(get_db), current_us
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
         
-@router.put("/change_password/{user_id}")
-def change_password(request: PasswordChangeRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user), user_id: int = None):
+@router.put("/change_password")
+def change_password(request: PasswordChangeRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     auth_service = AuthService(db)
     try:
+        user_id = current_user["id"]
         auth_service.change_password(user_id, request.old_password, request.new_password)
         return {"message": "Password changed successfully"}
     except ValueError as e:
