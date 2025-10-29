@@ -7,11 +7,6 @@ from pydantic import BaseModel
 
 router = APIRouter(prefix="/user", tags=["user"])
 
-class UserDataResponse(BaseModel):
-    name: str
-    last_name: str
-    email: str
-
 class UserEditRequest(BaseModel):
     name: str
     last_name: str
@@ -24,15 +19,11 @@ class PasswordChangeRequest(BaseModel):
 
 
 
-@router.get("/data/{user_id}", response_model=UserDataResponse)
+@router.get("/data/{user_id}")
 def userData(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user), user_id: int = None):
     auth_service = AuthService(db)
     user = auth_service.get_user_by_id(user_id) 
-    return UserDataResponse(
-        name=user.name,
-        last_name=user.last_name,
-        email=user.email
-    )
+    return user
 
 @router.put("/edit/{user_id}")
 def editUser(request: UserEditRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user), user_id: int = None):
