@@ -12,10 +12,13 @@ from App.Services.subject_services import SubjectService
 from App.Services.quiz_services import QuizService
 from App.Utils.open_ai import OpenAIClient
 from App.Utils.auth_utils import get_current_user
+from gtts import gTTS
+import tempfile
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
 UPLOAD_DIR = Path("Public").resolve()
+AUDIO_DIR = UPLOAD_DIR / "audio"
 
 @router.post("/uploads/{subject_id}")
 async def upload_and_analyze(
@@ -104,3 +107,43 @@ async def prueba():
     response = await openai_client.prueba()
     return response
 
+@router.get("/text_to_speech/{doc_id}")
+async def text_to_speech(doc_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    document_service = DocumentService(db)
+    document = document_service.get_document(doc_id)
+    
+    if not document:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+    text = document.content
+    
+    if not text or text.strip() == "":
+        raise HTTPException(status_code=400, detail="Document content is empty")
+    
+    if document.audio_url and os.path.exists(document.audio_url):
+        return FileResponse(
+            path=document.audio_url,
+            media_type="audio/mpeg",
+            filename=f"document_{document.id}.mp3"
+        )
+    
+    file_audio_response = f"document_{document.id}.mp3"
+    audio_path = os.path.join(AUDIO_DIR, file_audio_response)
+    
+    try: 
+        tts = gTTS(text, lang='es')
+        tts.save(audio_path)
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating audio: {str(e)}")
+        
+    document.audio_url = audio_path
+    db.commit()
+    db.refresh(document)    
+        
+    return FileResponse(
+        audio_path,
+        media_type="audio/mpeg",
+        filename=f"document_{document.id}.mp3"
+    )
+        

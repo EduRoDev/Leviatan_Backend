@@ -50,6 +50,7 @@ class Document(Base):
     content: Mapped[str] = mapped_column(String, nullable=False)
     file_path: Mapped[str] = mapped_column(String, nullable=False)
     subject_id: Mapped[int] = mapped_column(ForeignKey("subjects.id"), nullable=False)  # <- CORREGIDO
+    audio_url: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     
     #* Relacion inversa con Subject
     subject: Mapped["Subject"] = relationship(back_populates="documents")
