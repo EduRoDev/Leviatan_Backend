@@ -2,6 +2,7 @@ import logging
 from typing import Dict, Any, List
 import time
 import json
+import traceback
 from openai import AsyncOpenAI
 from openai import APIError, RateLimitError, APIConnectionError, APITimeoutError
 from App.Core.config import settings
@@ -364,6 +365,59 @@ class OpenAIClient:
             logger.error(f"Error en chat_with_document: {e}")
             return "Lo siento, ha ocurrido un error al procesar tu solicitud."
         
+        
+    async def study_plan_personalized(self, document_content: str, level_plan: str):
+        try:
+            max_document_length = 8000
+            truncated_content = document_content[:max_document_length] + (
+                "..." if len(document_content) > max_document_length else ""
+            )
+            
+            logger.info(f"🔄 Generando plan de estudio nivel {level_plan}")
+            
+            prompt = f"""
+            Basándote en el siguiente contenido del documento, crea un plan de estudio personalizado para un estudiante de nivel {level_plan}.
+            El plan debe incluir objetivos claros, recursos recomendados y un cronograma sugerido.
+
+            DOCUMENTO:
+            {truncated_content}
+
+            FORMATO DE RESPUESTA REQUERIDO (JSON):
+            {{
+                "study_plan": {{
+                    "objectives": ["objetivo 1", "objetivo 2"],
+                    "recommended_resources": ["recurso 1", "recurso 2"],
+                    "schedule": {{
+                        "week_1": "actividades",
+                        "week_2": "actividades"
+                    }}
+                }}
+            }}
+
+            Responde ÚNICAMENTE con el JSON, sin texto adicional antes o después.
+            """
+            
+            system_message = """Eres un experto en educación y creación de planes de estudio personalizados. 
+            Tu respuesta DEBE ser ÚNICAMENTE un objeto JSON válido con el formato especificado.
+            NO incluyas explicaciones, markdown, ni texto adicional. SOLO el JSON."""
+            
+            # ✅ Usar el método correcto _call_openai
+            result = await self._call_openai(prompt, system_message)
+            
+            if "study_plan" not in result["data"]:
+                logger.error(f"❌ Falta campo 'study_plan'. Data recibida: {result['data']}")
+                raise ValueError("Falta campo 'study_plan' en respuesta")
+            
+            logger.info(f"✅ Plan de estudio generado exitosamente en {result['response_time']:.2f}s")
+            logger.info(f"📊 Tokens usados: {result['usage']['total_tokens']}")
+            return result
+        
+        except Exception as e:
+            logger.error(f"❌ Error generando plan de estudio: {e}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            raise
+        
+    
     async def prueba(self):
         """Método de prueba simple"""
         try:

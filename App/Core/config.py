@@ -15,11 +15,21 @@ class Settings:
     
     CHAT_API_KEY: str = os.getenv("CHAT_API_KEY")
     CHAT_MODEL: str = os.getenv("CHAT_MODEL")
+      # Database config
+    USER_DB: str = os.getenv("USER_DB", "postgres")
+    USER_DB_PASSWORD: str = os.getenv("USER_DB_PASSWORD", "123456")
+    DB_NAME: str = os.getenv("DB_NAME", "leviatan_project")
     
-    # Database config
-    USER_DB: str = os.getenv("USER_DB")
-    USER_DB_PASSWORD: str = os.getenv("USER_DB_PASSWORD")
-    DB_NAME: str = os.getenv("DB_NAME")
+    # La URL de la base de datos se toma de las variables de entorno
+    # En local: postgresql://postgres:123456@localhost/leviatan_project
+    # En Render: postgresql://usuario:password@host/database (configurado en Render)
+    DATABASE_URL: str = os.getenv(
+        "DATABASE_URL", 
+        f"postgresql://{os.getenv('USER_DB', 'postgres')}:{os.getenv('USER_DB_PASSWORD', '123456')}@localhost/{os.getenv('DB_NAME', 'leviatan_project')}"
+    )
+    
+    DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
     
@@ -84,8 +94,7 @@ class Settings:
             headers["HTTP-Referer"] = self.OPENROUTER_SITE_URL
             headers["X-Title"] = self.OPENROUTER_APP_NAME
         
-        return headers
-
+        return headers    
     def __init__(self):
         provider = "OpenRouter" if self.is_openrouter() else "OpenAI"
         logger.info(f"Configuración cargada para {provider}:")
@@ -94,5 +103,16 @@ class Settings:
         logger.info(f"  - Modelo de chat: {self.CHAT_MODEL}")
         if self.is_openrouter():
             logger.info(f"  - App: {self.OPENROUTER_APP_NAME}")
+        
+        # Log información de la base de datos
+        logger.info(f"Configuración de Base de Datos:")
+        logger.info(f"  - Entorno: {self.ENVIRONMENT}")
+        # Ocultar credenciales en el log
+        db_url_safe = self.DATABASE_URL.replace(self.USER_DB_PASSWORD, "****") if self.USER_DB_PASSWORD else self.DATABASE_URL
+        logger.info(f"  - Database URL: {db_url_safe}")
+            
+    class Config:
+        env_file = ".env"
+        case_sensitive = False
 
 settings = Settings()

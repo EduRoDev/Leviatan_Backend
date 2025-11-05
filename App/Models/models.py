@@ -1,6 +1,7 @@
 from typing import Optional, List
 from datetime import datetime
 from sqlalchemy import ForeignKey, String, Integer, DateTime, Boolean, Float
+from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase, relationship
 from App.Database.database import Base
 
@@ -12,8 +13,7 @@ class User(Base):
     last_name: Mapped[str] = mapped_column(String(30), nullable=False)
     email: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(255), nullable=False)
-    
-    #* Relacion uno a muchos (Usuario a Materias [1:N])
+      #* Relacion uno a muchos (Usuario a Materias [1:N])
     subjects: Mapped[List["Subject"]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
@@ -22,6 +22,11 @@ class User(Base):
     
     #* Relacion con el historial del chat
     chat_histories: Mapped[List["ChatHistory"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
+    
+    #* Relacion con planes de estudio personalizados
+    study_plans: Mapped[List["CustomStudyPlan"]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
 
@@ -70,9 +75,13 @@ class Document(Base):
     quizzes: Mapped[List["Quiz"]] = relationship(
         back_populates="document", cascade="all, delete-orphan"
     )
-    
-    #! Relacion con el historial del chat
+      #! Relacion con el historial del chat
     chat_histories: Mapped[List["ChatHistory"]] = relationship(
+        back_populates="document", cascade="all, delete-orphan"
+    )
+    
+    #! Relacion con planes de estudio personalizados
+    study_plans: Mapped[List["CustomStudyPlan"]] = relationship(
         back_populates="document", cascade="all, delete-orphan"
     )
     
@@ -179,3 +188,27 @@ class ChatHistory(Base):
     
     user:Mapped["User"] = relationship()
     document:Mapped["Document"] = relationship()
+
+
+class CustomStudyPlan(Base):
+    """
+    Modelo para almacenar planes de estudio personalizados generados por IA
+    El campo 'content' almacena la estructura JSON del plan de estudio
+    """
+    __tablename__ = "custom_study_plans"
+    
+    # Campos básicos
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    title: Mapped[str] = mapped_column(String(200), nullable=False)
+    level: Mapped[str] = mapped_column(String(50), nullable=False)  # "básico", "intermedio", "avanzado"
+    
+    content: Mapped[dict] = mapped_column(JSON, nullable=False)
+    
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    document_id: Mapped[Optional[int]] = mapped_column(ForeignKey("documents.id"), nullable=True)
+    
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
+    
+    user: Mapped["User"] = relationship(back_populates="study_plans")
+    document: Mapped[Optional["Document"]] = relationship(back_populates="study_plans")
