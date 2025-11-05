@@ -93,7 +93,7 @@ class StudyPlanService:
     def get_study_plans_by_document(
         self,
         document_id: int,
-        user_id: Optional[int] = None
+        level: str = None
     ) -> List[CustomStudyPlan]:
         """
         Obtiene todos los planes de estudio relacionados con un documento.
@@ -106,13 +106,11 @@ class StudyPlanService:
             Lista de planes de estudio
         """
         query = self.db.query(CustomStudyPlan).filter(
-            CustomStudyPlan.document_id == document_id
+            CustomStudyPlan.document_id == document_id,
+            CustomStudyPlan.level == level.lower()
         )
         
-        if user_id:
-            query = query.filter(CustomStudyPlan.user_id == user_id)
-        
-        return query.order_by(CustomStudyPlan.created_at.desc()).all()
+        return query.first()
     
     
     def get_study_plans_by_level(

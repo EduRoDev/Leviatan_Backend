@@ -132,3 +132,24 @@ def get_study_plan(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error interno del servidor: {str(e)}"
         )
+        
+@router.get("/by-document/{document_id}/{level}", status_code=status.HTTP_200_OK)
+async def get_study_plan_by_document(
+    document_id: int,
+    level: str,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user),
+):
+    plan_services = StudyPlanService(db)
+    
+    try:
+        study_plans = plan_services.get_study_plans_by_document(document_id, level)
+        return study_plans
+    
+    except Exception as e:
+        logger.error(f"Error inesperado en get_study_plan_by_document: {e}")
+        logger.error(f"Traceback completo:\n{traceback.format_exc()}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error interno del servidor: {str(e)}"
+        )
